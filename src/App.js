@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Input from './components/Input';
+import FlightInput from './components/FlightInput';
+import Date from './components/Date';
+import Nav from './components/Nav';
 
 class App extends Component {
   state = {
@@ -8,18 +10,49 @@ class App extends Component {
     destinationCountry: { Places: [] }
   }
   render() {
-    console.log(this.state.originCountry);
+    // console.log(this.state.originCountry);
     return (
-      <div className="outer-box">
-        <div className="input-field">
-          <Input type={'originCountry'} Places={this.state.originCountry.Places} onInput={this.onInput} />
-          <Input type={'destinationCountry'} Places={this.state.destinationCountry.Places} onInput={this.onInput} />
-          <input type="date"></input>
-          <input type="date"></input>
-          <input type='number'></input>
+      <div>
+        <Nav />
+        <div className="outer-box">
+          <div className="input-fields">
+            <div>
+              <label>Origin</label>
+              <FlightInput type={'originCountry'} showDropDown={this.state.originCountry.Places.length > 0 && true} countrySelection={this.state.originCountrySelection} Places={this.state.originCountry.Places} onInput={this.onInput} onAirportSelect={this.onAirportSelect} />
+            </div>
+            <div>
+              <label>Destination</label>
+              <FlightInput type={'destinationCountry'} showDropDown={this.state.destinationCountry.Places.length > 0 && true} countrySelection={this.state.destinationCountrySelection} Places={this.state.destinationCountry.Places} onInput={this.onInput} onAirportSelect={this.onAirportSelect} />
+            </div>
+            <div>
+              <label>Depart</label>
+              <div>
+                <Date />
+              </div>
+            </div>
+            <div>
+              <label>Return</label>
+              <div>
+                <Date />
+              </div>
+            </div>
+            <div>
+              <label># Nomaders</label>
+              <div><input type='number'></input></div>
+            </div>
+            <button className="results-button">Let's go!</button>
+          </div>
         </div>
       </div>
     );
+  }
+
+  onAirportSelect = (PlaceName, type) => {
+    this.setState({ [type + 'Selection']: PlaceName, [type]: { Places: [] } });
+  }
+
+  submitResults = (e) => {
+
   }
 
   onInput = (e) => {
