@@ -1,63 +1,75 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 class Nav extends Component {
+  // const [click, setClick] = useState(false);
+
+  //  const handleClick = () => setClick(!click);
+
+  state = { click: false };
+
+  handleClick = () => this.setState({ click: !this.state.click });
+
   render() {
+    const { click } = this.state;
     return (
-      <div>
-        <nav className="navbar" id="myNav">
-          <div className="brand-logo">
-            {/* <img src="./ACE.svg" alt="Aaron Logo" /> */}
+      <nav className="navbar">
+        <div className="nav-container">
+          <NavLink exct to="/" className="nav-logo">
+            Nomader
+            <i className="fas fa-plane"></i>
+          </NavLink>
+          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/flight-deals"
+                activeClassName="active"
+                className="nav-links"
+                onClick={this.handleClick}
+              >
+                Flight Deals
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/hottest-destinations"
+                activeClassName="active"
+                className="nav-links"
+                onClick={this.handleClick}
+              >
+                Hottest Destinations
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/contact"
+                activeClassName="active"
+                className="nav-links"
+                onClick={this.handleClick}
+              >
+                Contact
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active"
+                className="nav-links"
+                onClick={this.handleClick}
+              >
+                Home
+              </NavLink>
+            </li>
+          </ul>
+          <div className="nav-icon" onClick={this.handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
           </div>
-          {/* <a href="/" className="toggle-button">
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </a> */}
-          <div className="navbar-links">
-            <ul>
-            <li>
-                <a href="/">Hottest Destinations</a>
-              </li>
-            <li>
-                <a href="/">Flight Deals</a>
-              </li>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/contact">Contact</a>
-              </li>
-              <li className="menu-icons">
-                <a
-                  href="https://github.com/acedmiston"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FontAwesomeIcon
-                    icon={['fas', 'github']}
-                    style={{ fontSize: '20px' }}
-                  ></FontAwesomeIcon>
-                </a>
-              </li>
-              <li className="menu-icons">
-                <a
-                  href="https://www.linkedin.com/in/aaronedmiston/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <i
-                    className="fab fa-linkedin"
-                    style={{ fontSize: '20px' }}
-                  ></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     );
   }
 }

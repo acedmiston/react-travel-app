@@ -15,7 +15,8 @@ class FlightInput extends Component {
           <ul className="drop-down">
             {this.props.Places.map((option) => {
               return (
-                <li className="airport-list"
+                <li
+                  className="airport-list"
                   onClick={() =>
                     this.props.onAirportSelect(
                       option.PlaceName,
