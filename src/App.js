@@ -10,6 +10,8 @@ import FlightDeals from './Pages/FlightDeals';
 import Home from './Pages/Home';
 import Contact from './Pages/Contact';
 import HottestDestinations from './Pages/HottestDestinations';
+import Footer from './components/Footer';
+import Blog from './Pages/Blog';
 
 
 class App extends Component {
@@ -21,6 +23,7 @@ class App extends Component {
           <div className="pages">
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/blog" component={Blog} />
               <Route path="/contact" component={Contact} />
               <Route path="/flight-deals" component={FlightDeals} />
               <Route path="/hottest-destinations" component={HottestDestinations} />
@@ -28,6 +31,7 @@ class App extends Component {
             <Redirect to="/" />
           </div>
         </Router>
+        <Footer />
       </div>
     );
   }

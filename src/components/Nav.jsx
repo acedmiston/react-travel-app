@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import CountryFlags from './CountryFlags';
+import CurrencySelect from './CurrencySelect';
 
 class Nav extends Component {
-  // const [click, setClick] = useState(false);
-
-  //  const handleClick = () => setClick(!click);
-
   state = { click: false };
 
   handleClick = () => this.setState({ click: !this.state.click });
@@ -45,6 +43,17 @@ class Nav extends Component {
             <li className="nav-item">
               <NavLink
                 exact
+                to="/blog"
+                activeClassName="active"
+                className="nav-links"
+                onClick={this.handleClick}
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
                 to="/contact"
                 activeClassName="active"
                 className="nav-links"
@@ -65,6 +74,8 @@ class Nav extends Component {
               </NavLink>
             </li>
           </ul>
+          <CurrencySelect />
+          <CountryFlags />
           <div className="nav-icon" onClick={this.handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
           </div>
