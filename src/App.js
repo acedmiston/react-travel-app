@@ -1,43 +1,40 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import Input from './components/Input';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
+import Nav from './components/Nav';
+import FlightDeals from './Pages/FlightDeals';
+import Home from './Pages/Home';
+import Contact from './Pages/Contact';
+import HottestDestinations from './Pages/HottestDestinations';
+import Footer from './components/Footer';
+import Blog from './Pages/Blog';
+
 
 class App extends Component {
-  state = {
-    originCountry: { Places: [] },
-    destinationCountry: { Places: [] }
-  }
   render() {
-    console.log(this.state.originCountry);
     return (
-      <>
-        <Input type={'originCountry'} Places={this.state.originCountry.Places} onInput={this.onInput} />
-        <Input type={'destinationCountry'} Places={this.state.destinationCountry.Places} onInput={this.onInput} />
-      </>
+      <div>
+        <Router>
+          <Nav />
+          <div className="pages">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/blog" component={Blog} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/flight-deals" component={FlightDeals} />
+              <Route path="/hottest-destinations" component={HottestDestinations} />
+            </Switch>
+            <Redirect to="/" />
+          </div>
+        </Router>
+        <Footer />
+      </div>
     );
   }
-
-  onInput = (e) => {
-    const options = {
-      method: 'GET',
-      url:
-        'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/',
-      params: { query: e.target.value },
-      headers: {
-        'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
-        'x-rapidapi-host':
-          'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
-      },
-    };
-    this.getAPIData(e.target.id, options);
-  }
-
-  async getAPIData(id, options) {
-    const result = await axios.request(options);
-    this.setState({ [id]: result.data });
-    console.log(this.state);
-  }
 }
-
 
 export default App;
