@@ -22,7 +22,6 @@ class CovidInfo extends Component {
             <button className="covid-buttons">Manage My Booking</button>
           </div>
           <div className="covid-box">
-            <br />
           <p className="covid-title">Coronavirus information</p>
           <p className="covid-text">
               Read about how the new travel restrictions might affect your trip.
