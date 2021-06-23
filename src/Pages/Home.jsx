@@ -9,6 +9,7 @@ class Home extends Component {
   state = {
     originCountry: { Places: [] },
     destinationCountry: { Places: [] },
+    selectedOption: 'return',
   };
   render() {
     return (
@@ -18,12 +19,30 @@ class Home extends Component {
           <div className="outer-box">
             <div className="radio-container">
               <div className="radio">
-                <label>Return</label>
-                <input type="radio" name="direction" />
+                <label class="radio-label">
+                  <input
+                    type="radio"
+                    name="direction"
+                    value="return"
+                    checked={this.state.selectedOption === 'return'}
+                    className="form-check-input"
+                  />
+                  <div class="form-check-circle"></div>
+                  <span>Return</span>
+                </label>
               </div>
               <div className="radio">
-                <label>One way</label>
-                <input type="radio" name="direction" />
+                <label class="radio-label">
+                  <input
+                    type="radio"
+                    name="direction"
+                    value="one-way"
+                    checked={this.state.selectedOption === 'one-way'}
+                    className="form-check-input"
+                  />
+                  <div class="form-check-circle"></div>
+                  <span>One way</span>
+                </label>
               </div>
             </div>
             <div className="input-fields">
