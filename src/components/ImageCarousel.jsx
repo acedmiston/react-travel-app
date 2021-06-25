@@ -14,7 +14,7 @@ const breakPoints = [
   { width: 1200, itemsToShow: 4 },
 ];
 
-class ImageSlider extends Component {
+class ImageCarousel extends Component {
   state = {
     items: [
       { id: 1, src: Cliffs },
@@ -59,7 +59,7 @@ class ImageSlider extends Component {
   }
 }
 
-export default ImageSlider;
+export default ImageCarousel;
 
 //shuffle(array){
 // let currentIndex = array.length,

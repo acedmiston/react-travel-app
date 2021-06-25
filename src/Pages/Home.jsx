@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FlightInput from '../components/FlightInput';
-import Date from '../components/Date';
+// import Date from '../components/Date';
 import CovidInfo from '../components/CovidInfo';
-import ImageSlider from '../components/ImageSlider';
+import ImageCarousel from '../components/ImageCarousel';
 
 class Home extends Component {
   state = {
     originCountry: { Places: [] },
     destinationCountry: { Places: [] },
-    selectedOption: 'return',
+    selectedOption: '',
+    outBoundDate: '',
+    inBoundDate: '',
+    numberTravelers: '',
   };
   render() {
     return (
@@ -19,28 +22,29 @@ class Home extends Component {
           <div className="outer-box">
             <div className="radio-container">
               <div className="radio">
-                <label class="radio-label">
+                <label className="radio-label">
                   <input
                     type="radio"
                     name="direction"
                     value="return"
-                    checked={this.state.selectedOption === 'return'}
+                    checked={true}
                     className="form-check-input"
+                    onChange={this.onChange}
                   />
-                  <div class="form-check-circle"></div>
+                  <div className="form-check-circle"></div>
                   <span>Return</span>
                 </label>
               </div>
               <div className="radio">
-                <label class="radio-label">
+                <label className="radio-label">
                   <input
                     type="radio"
                     name="direction"
                     value="one-way"
-                    checked={this.state.selectedOption === 'one-way'}
                     className="form-check-input"
+                    onChange={this.onChange}
                   />
-                  <div class="form-check-circle"></div>
+                  <div className="form-check-circle"></div>
                   <span>One way</span>
                 </label>
               </div>
@@ -75,19 +79,23 @@ class Home extends Component {
               <div>
                 <label>Depart</label>
                 <div>
-                  <Date />
+                  <input type="date" onChange={this.onChange}></input>
                 </div>
               </div>
               <div>
                 <label>Return</label>
                 <div>
-                  <Date />
+                  <input type="date" onChange={this.onChange}></input>
                 </div>
               </div>
               <div>
                 <label># Nomaders</label>
                 <div>
-                  <input type="number"></input>
+                  <input
+                    className="number-input"
+                    type="number"
+                    onChange={this.onChange}
+                  ></input>
                 </div>
               </div>
               <button className="results-button" onClick={this.onSubmit}>
@@ -96,22 +104,28 @@ class Home extends Component {
             </div>
           </div>
         </form>
-        <p className="flight-deals-title">Flight Deals For You</p>
-        <ImageSlider />
-        <p className="hottest-destinations-title">
-          Today's Hottest Destinations
-        </p>
-        <ImageSlider />
+        <div className="carousels-container">
+          <p className="flight-deals-title">Flight Deals For You</p>
+          <ImageCarousel />
+          <p className="hottest-destinations-title">
+            Today's Hottest Destinations
+          </p>
+          <ImageCarousel />
+        </div>
         <CovidInfo />
       </>
     );
   }
 
-  onSubmit = () => {
+  onSubmit = (e) => {
+    e.preventDefault();
     let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/
     apiservices/
     browsequotes/v1.0/
-    %7Bcountry%7D/%7Bcurrency%7D/%7Blocale%7D/%7B ${this.state.originCountry} %7D/%7Bdestinationplace%7D/%7Boutboundpartialdate%7D/%7Binboundpartialdate%7D`;
+    %7Bcountry%7D/%7Bcurrency%7D/%7Blocale%7D/%7B ${this.state.originCountry} %7D/
+    %7Bd${this.state.destinationCountry}%7D/
+    %7B ${this.state.outBoundDate}%7D/
+    %7B${this.state.inBoundDate}%7D`;
     const options = {
       method: 'GET',
       url,
@@ -134,6 +148,11 @@ class Home extends Component {
 
   onAirportSelect = (PlaceName, type) => {
     this.setState({ [type + 'Selection']: PlaceName, [type]: { Places: [] } });
+  };
+
+  onChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.value);
   };
 
   onInput = (e) => {

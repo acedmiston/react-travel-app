@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
   Switch,
 } from 'react-router-dom';
 import Nav from './components/Nav';
@@ -12,13 +11,14 @@ import Contact from './Pages/Contact';
 import HottestDestinations from './Pages/HottestDestinations';
 import Footer from './components/Footer';
 import Blog from './Pages/Blog';
+import NotFound from './Pages/NotFound';
 
 
 class App extends Component {
   render() {
     return (
       <div className="page-container">
-        <Router>
+        <Router basename="/">
           <Nav />
           <main>
             <div className="pages">
@@ -28,8 +28,8 @@ class App extends Component {
                 <Route path="/contact" component={Contact} />
                 <Route path="/flight-deals" component={FlightDeals} />
                 <Route path="/hottest-destinations" component={HottestDestinations} />
+                <Route path="*" component={NotFound} />
               </Switch>
-              <Redirect to="/" />
             </div>
           </main>
         </Router>

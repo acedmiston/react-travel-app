@@ -73,9 +73,13 @@ class Nav extends Component {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item">
+              <CurrencySelect />
+            </li>
+            <li className="nav-item">
+              <CountryFlags />
+            </li>
           </ul>
-          <CurrencySelect />
-          <CountryFlags />
           <div className="nav-icon" onClick={this.handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>
           </div>
