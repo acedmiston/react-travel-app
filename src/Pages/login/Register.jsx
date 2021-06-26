@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
-import loginImg from '';
+import loginImg from './world.png';
+import './login.scss';
+import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
-  state = {};
+  // not really neccessary yet
+  state = { username: '', password: '' };
+
+  // why cant i get this to redirect?
+  onSubmit = () => {
+    return <Redirect to="/" />;
+  };
+
+// would be nice to get this working?
+  // Checking(e) {
+  //   e.preventDefault();
+  //   if (this.state.username === '' || this.state.password === '') {
+  //     alert('Fields are required');
+  //     return;
+  //   } else {
+  //     alert('Login Failed ! . Check Username and Password.');
+  //   }
+
+  //   console.log(`${this.state.username}`);
+  // }
+
   render() {
     return (
       <div className="base-container">
         <div className="header">Register</div>
         <div className="content">
           <div className="image">
-            <img src={loginImg} alt="" />
+            <img src={loginImg} alt="world" />
           </div>
           <div className="form">
             <div className="form-group">
@@ -27,7 +49,7 @@ class Register extends Component {
           </div>
         </div>
         <div className="footer">
-          <button type="button" className="btn">
+          <button type="submit" className="btn" onSubmit={this.onSubmit}>
             Register
           </button>
         </div>

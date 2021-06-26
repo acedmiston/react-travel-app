@@ -552,3 +552,46 @@ main {
 .carousels-container {
   margin: 320px 0 0 0;
 }
+
+.not-found {
+  background-color: rgba(160, 142, 142, 0.781);
+  margin: 100px auto;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.not-found h2 {
+  color: gold;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 40px;
+}
+.not-found p {
+  color: gold;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 32px;
+}
+
+.not-found a {
+  font-size: 28px;
+  text-decoration: none;
+  color: rgba(8, 8, 8, 0.914);
+  text-align: center;
+}
+
+.not-found a:hover {
+  color: gold;
+}
+
+/* not responsive need to fix to center */
+.not-found img {
+  width: 88%;
+  height: auto;
+  margin-left: 50px;
+}
+
+.not-found-link {
+  margin: 0 auto;
+  text-align: center;
+}

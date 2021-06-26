@@ -12,6 +12,7 @@ import HottestDestinations from './Pages/HottestDestinations';
 import Footer from './components/Footer';
 import Blog from './Pages/Blog';
 import NotFound from './Pages/NotFound';
+import Welcome from './Pages/Welcome';
 
 
 class App extends Component {
@@ -23,6 +24,8 @@ class App extends Component {
           <main>
             <div className="pages">
               <Switch>
+                {/* I need to fix this welcome page to be the first thing, then taken home after login */}
+                <Route path="/welcome" component={Welcome} />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/blog" component={Blog} />
                 <Route path="/contact" component={Contact} />

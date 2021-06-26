@@ -158,7 +158,6 @@ class Home extends Component {
       .catch(function (error) {
         console.error(error);
       });
-    console.log('destination', this.state.destinationCountry.Places[0]);
   };
 
   onAirportSelect = (place, type) => {
