@@ -9,10 +9,10 @@ class Home extends Component {
   state = {
     originCountry: { Places: [] },
     destinationCountry: { Places: [] },
-    selectedOption: '',
+    flightDirection: 'return',
     outBoundDate: '',
     inBoundDate: '',
-    numberTravelers: '',
+    numberNomaders: '',
   };
   render() {
     return (
@@ -25,9 +25,9 @@ class Home extends Component {
                 <label className="radio-label">
                   <input
                     type="radio"
-                    name="direction"
+                    name="flightDirection"
                     value="return"
-                    checked={true}
+                    checked={this.state.flightDirection === 'return'}
                     className="form-check-input"
                     onChange={this.onChange}
                   />
@@ -39,8 +39,9 @@ class Home extends Component {
                 <label className="radio-label">
                   <input
                     type="radio"
-                    name="direction"
+                    name="flightDirection"
                     value="one-way"
+                    checked={this.state.flightDirection === 'one-way'}
                     className="form-check-input"
                     onChange={this.onChange}
                   />
@@ -52,12 +53,19 @@ class Home extends Component {
             <div className="input-fields">
               <div>
                 <label>Origin</label>
+                {/* we currently use the text field to store user input and the selected airport after user has chosen from dropdown 
+                we should be storing user input value in state and clearing it when value is selected from the dropdown
+                */}
                 <FlightInput
                   type={'originCountry'}
                   showDropDown={
                     this.state.originCountry.Places.length > 0 && true
                   }
-                  countrySelection={this.state.originCountrySelection}
+                  countrySelection={
+                    this.state.originCountrySelection
+                      ? this.state.originCountrySelection.PlaceName
+                      : ''
+                  }
                   Places={this.state.originCountry.Places}
                   onInput={this.onInput}
                   onAirportSelect={this.onAirportSelect}
@@ -70,7 +78,11 @@ class Home extends Component {
                   showDropDown={
                     this.state.destinationCountry.Places.length > 0 && true
                   }
-                  countrySelection={this.state.destinationCountrySelection}
+                  countrySelection={
+                    this.state.destinationCountrySelection
+                      ? this.state.destinationCountrySelection.PlaceName
+                      : ''
+                  }
                   Places={this.state.destinationCountry.Places}
                   onInput={this.onInput}
                   onAirportSelect={this.onAirportSelect}
@@ -79,13 +91,21 @@ class Home extends Component {
               <div>
                 <label>Depart</label>
                 <div>
-                  <input type="date" onChange={this.onChange}></input>
+                  <input
+                    type="date"
+                    name="outBoundDate"
+                    onChange={this.onChange}
+                  ></input>
                 </div>
               </div>
               <div>
                 <label>Return</label>
                 <div>
-                  <input type="date" onChange={this.onChange}></input>
+                  <input
+                    type="date"
+                    name="inBoundDate"
+                    onChange={this.onChange}
+                  ></input>
                 </div>
               </div>
               <div>
@@ -93,6 +113,7 @@ class Home extends Component {
                 <div>
                   <input
                     className="number-input"
+                    name="numberNomaders"
                     type="number"
                     onChange={this.onChange}
                   ></input>
@@ -119,13 +140,7 @@ class Home extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/
-    apiservices/
-    browsequotes/v1.0/
-    %7Bcountry%7D/%7Bcurrency%7D/%7Blocale%7D/%7B ${this.state.originCountry} %7D/
-    %7Bd${this.state.destinationCountry}%7D/
-    %7B ${this.state.outBoundDate}%7D/
-    %7B${this.state.inBoundDate}%7D`;
+    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/GB/GBP/en-GB/${this.state.originCountrySelection.PlaceId}/${this.state.destinationCountrySelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
     const options = {
       method: 'GET',
       url,
@@ -135,7 +150,6 @@ class Home extends Component {
           'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
       },
     };
-
     axios
       .request(options)
       .then(function (response) {
@@ -144,15 +158,19 @@ class Home extends Component {
       .catch(function (error) {
         console.error(error);
       });
+    console.log('destination', this.state.destinationCountry.Places[0]);
   };
 
-  onAirportSelect = (PlaceName, type) => {
-    this.setState({ [type + 'Selection']: PlaceName, [type]: { Places: [] } });
+  onAirportSelect = (place, type) => {
+    // setting object with dynamic key based on a variable
+    this.setState({ [type + 'Selection']: place, [type]: { Places: [] } });
+    console.log(place, type);
   };
 
-  onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.value);
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      console.log(this.state);
+    });
   };
 
   onInput = (e) => {

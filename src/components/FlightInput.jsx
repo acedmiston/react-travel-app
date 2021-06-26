@@ -19,7 +19,7 @@ class FlightInput extends Component {
                   className="airport-list"
                   onClick={() =>
                     this.props.onAirportSelect(
-                      option.PlaceName,
+                      option,
                       this.props.type
                     )
                   }
