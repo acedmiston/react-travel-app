@@ -13,7 +13,7 @@ class Nav extends Component {
     return (
       <nav className="navbar">
         <div className="nav-container">
-          <NavLink exct to="/" className="nav-logo">
+          <NavLink exact to="/" className="nav-logo">
             Nomader
             <i className="fas fa-plane"></i>
           </NavLink>

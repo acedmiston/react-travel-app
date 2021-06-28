@@ -15,9 +15,13 @@ body {
   background-position: center bottom;
 }
 
+.tagline-holder {
+  margin: 20px auto;
+}
+
 .home-tagline {
   font-size: 30px;
-  margin: 20px 110px -10px;
+  text-align: center;
 }
 
 .input-fields {
@@ -45,6 +49,7 @@ body {
   max-width: 1000px;
   border-radius: 10px;
   margin: 20px auto 0;
+  padding: 0 0px 0 25px;
 }
 
 .flight-direction {
@@ -180,16 +185,18 @@ label {
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  margin: 100px auto 0px;
+  margin: 100px auto 0;
+  width: 85%;
 }
 
 .covid-box {
-  width: 100%;
+  width: 80%;
   margin: 10px auto;
   display: flex;
   align-content: space-between;
   flex-wrap: wrap;
   flex-direction: row;
+  padding: 0 7px;
 }
 
 .covid-title {
@@ -300,6 +307,26 @@ footer {
   background: #00c0db;
 }
 
+@media screen and (max-width: 1040px) {
+
+  .covid-boxes {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto -20px;
+    width: 80%;
+  }
+  
+  .covid-box:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    position: relative;
+    background: black;
+    margin: 8px 0;
+  }
+}
+
+
 @media screen and (max-width: 960px) {
   .nav-menu {
     display: flex;
@@ -340,21 +367,17 @@ footer {
     cursor: pointer;
     color: #ffdd40;
   }
-  .covid-boxes {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: -20px;
+
+  .results-button {
+    width: 300px;
   }
 
-  .covid-box:after {
-    content: '';
-    width: 100%;
-    height: 3px;
-    position: relative;
-    background: black;
-    margin: 8px 0;
+  .image-slider {
+    margin: 0 auto;
   }
 }
+
+
 
 .page-container {
   display: flex;
@@ -545,7 +568,7 @@ main {
 
 .hottest-destinations-title,
 .flight-deals-title {
-  padding: 0 0 10px 160px;
+  text-align: center;
   font-size: 30px;
 }
 

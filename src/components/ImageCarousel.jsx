@@ -44,8 +44,8 @@ class ImageCarousel extends Component {
         <div className="image-slider">
           <Carousel breakPoints={breakPoints}>
             {items.map((item) => (
-              <div className="carousel-container">
-                <div key={item.id} className="carousel">
+              <div key={item.id} className="carousel-container">
+                <div className="carousel">
                   <Link to="/hottest-destinations">
                     <img src={item.src} alt="" className="carousel-img" />
                   </Link>

@@ -13,11 +13,15 @@ class Home extends Component {
     outBoundDate: '',
     inBoundDate: '',
     numberNomaders: '',
+    originCountryInputValue: '',
+    destinationCountryInputValue: '',
   };
   render() {
     return (
       <>
-        <p className="home-tagline">Where will you go next?</p>
+        <div className="tagline-holder">
+          <p className="home-tagline">Where will you go next?</p>
+        </div>
         <form>
           <div className="outer-box">
             <div className="radio-container">
@@ -61,14 +65,16 @@ class Home extends Component {
                   showDropDown={
                     this.state.originCountry.Places.length > 0 && true
                   }
-                  countrySelection={
-                    this.state.originCountrySelection
-                      ? this.state.originCountrySelection.PlaceName
-                      : ''
-                  }
+                  // countrySelection={
+                  //   this.state.originCountrySelection
+                  //     ? this.state.originCountrySelection.PlaceName
+                  //     : ''
+                  // }
+                  value={this.state.originCountryInputValue}
                   Places={this.state.originCountry.Places}
                   onInput={this.onInput}
                   onAirportSelect={this.onAirportSelect}
+                  onClear={this.onClear}
                 />
               </div>
               <div>
@@ -78,14 +84,16 @@ class Home extends Component {
                   showDropDown={
                     this.state.destinationCountry.Places.length > 0 && true
                   }
-                  countrySelection={
-                    this.state.destinationCountrySelection
-                      ? this.state.destinationCountrySelection.PlaceName
-                      : ''
-                  }
+                  // countrySelection={
+                  //   this.state.destinationCountrySelection
+                  //     ? this.state.destinationCountrySelection.PlaceName
+                  //     : ''
+                  // }
                   Places={this.state.destinationCountry.Places}
                   onInput={this.onInput}
+                  value={this.state.destinationCountryInputValue}
                   onAirportSelect={this.onAirportSelect}
+                  onClear={this.onClear}
                 />
               </div>
               <div>
@@ -138,6 +146,12 @@ class Home extends Component {
     );
   }
 
+  onClear = (type) => {
+    console.log('i am a string', this.state, [type + 'InputValue']);
+
+    this.setState({ [type + 'InputValue']: '' });
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
     let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/GB/GBP/en-GB/${this.state.originCountrySelection.PlaceId}/${this.state.destinationCountrySelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
@@ -162,7 +176,12 @@ class Home extends Component {
 
   onAirportSelect = (place, type) => {
     // setting object with dynamic key based on a variable
-    this.setState({ [type + 'Selection']: place, [type]: { Places: [] } });
+    console.log(type);
+    this.setState({
+      [type + 'Selection']: place,
+      [type]: { Places: [] },
+      [type + 'InputValue']: place.PlaceName,
+    });
     console.log(place, type);
   };
 
@@ -173,6 +192,8 @@ class Home extends Component {
   };
 
   onInput = (e) => {
+    console.log(e.target.id, e.target.value);
+    this.setState({ [e.target.id + 'InputValue']: e.target.value });
     const options = {
       method: 'GET',
       url: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/',

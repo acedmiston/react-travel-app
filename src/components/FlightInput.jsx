@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 class FlightInput extends Component {
   state = {};
   render() {
+    console.log(this.props.value);
+
     return (
       <div className="flight-direction">
         <input
-          value={this.props.countrySelection}
+          value={this.props.value}
           id={this.props.type}
           onInput={this.props.onInput}
+          onFocus={() => this.props.onClear(this.props.type)}
         />
 
         {this.props.showDropDown && (
@@ -18,10 +21,7 @@ class FlightInput extends Component {
                 <li
                   className="airport-list"
                   onClick={() =>
-                    this.props.onAirportSelect(
-                      option,
-                      this.props.type
-                    )
+                    this.props.onAirportSelect(option, this.props.type)
                   }
                 >
                   {option.PlaceName}
