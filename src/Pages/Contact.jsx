@@ -50,19 +50,12 @@ class Contact extends Component {
             </Form.Item>
             <Form.Item
               className="input-field"
-              name="subject"
-              rules={[{ required: true, message: 'Please input a subject!' }]}
-            >
-              <Input placeholder="Subject" />
-            </Form.Item>
-            <Form.Item
-              className="input-field"
               name="message"
               rules={[{ required: true, message: 'Please input a message!' }]}
             >
               <TextArea placeholder="Message" />
             </Form.Item>
-            <Form.Item>
+            <div className="contact-button-holder">
               <Button
                 type="primary"
                 htmlType="submit"
@@ -70,7 +63,7 @@ class Contact extends Component {
               >
                 Submit
               </Button>
-            </Form.Item>
+            </div>
           </Form>
         </div>
       </div>

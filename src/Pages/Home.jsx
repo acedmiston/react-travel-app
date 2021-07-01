@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FlightInput from '../components/FlightInput';
-// import Date from '../components/Date';
 import CovidInfo from '../components/CovidInfo';
 import ImageCarousel from '../components/ImageCarousel';
 
 class Home extends Component {
   state = {
-    originCountry: { Places: [] },
-    destinationCountry: { Places: [] },
+    country: 'GB',
+    currency: 'GBP',
+    locale: 'en-GB',
+    originAirport: { Places: [] },
+    destinationAirport: { Places: [] },
     flightDirection: 'return',
     outBoundDate: '',
     inBoundDate: '',
     numberNomaders: '',
-    originCountryInputValue: '',
-    destinationCountryInputValue: '',
+    originAirportInputValue: '',
+    destinationAirportInputValue: '',
+    results: null,
   };
+
+  componentDidUpdate() {
+    console.log(this.state.results);
+  }
+
   render() {
     return (
       <>
@@ -61,17 +69,17 @@ class Home extends Component {
                 we should be storing user input value in state and clearing it when value is selected from the dropdown
                 */}
                 <FlightInput
-                  type={'originCountry'}
+                  type={'originAirport'}
                   showDropDown={
-                    this.state.originCountry.Places.length > 0 && true
+                    this.state.originAirport.Places.length > 0 && true
                   }
                   // countrySelection={
-                  //   this.state.originCountrySelection
-                  //     ? this.state.originCountrySelection.PlaceName
+                  //   this.state.originAirportSelection
+                  //     ? this.state.originAirportSelection.PlaceName
                   //     : ''
                   // }
-                  value={this.state.originCountryInputValue}
-                  Places={this.state.originCountry.Places}
+                  value={this.state.originAirportInputValue}
+                  Places={this.state.originAirport.Places}
                   onInput={this.onInput}
                   onAirportSelect={this.onAirportSelect}
                   onClear={this.onClear}
@@ -80,18 +88,18 @@ class Home extends Component {
               <div>
                 <label>Destination</label>
                 <FlightInput
-                  type={'destinationCountry'}
+                  type={'destinationAirport'}
                   showDropDown={
-                    this.state.destinationCountry.Places.length > 0 && true
+                    this.state.destinationAirport.Places.length > 0 && true
                   }
                   // countrySelection={
-                  //   this.state.destinationCountrySelection
-                  //     ? this.state.destinationCountrySelection.PlaceName
+                  //   this.state.destinationAirportSelection
+                  //     ? this.state.destinationAirportSelection.PlaceName
                   //     : ''
                   // }
-                  Places={this.state.destinationCountry.Places}
+                  Places={this.state.destinationAirport.Places}
                   onInput={this.onInput}
-                  value={this.state.destinationCountryInputValue}
+                  value={this.state.destinationAirportInputValue}
                   onAirportSelect={this.onAirportSelect}
                   onClear={this.onClear}
                 />
@@ -113,6 +121,7 @@ class Home extends Component {
                     type="date"
                     name="inBoundDate"
                     onChange={this.onChange}
+                    disabled={this.state.flightDirection === 'one-way'}
                   ></input>
                 </div>
               </div>
@@ -133,6 +142,29 @@ class Home extends Component {
             </div>
           </div>
         </form>
+        <div className="display-results">
+        {/* {this.state.results && JSON.stringify(this.state.results.Carriers)}
+          {this.state.results &&
+            this.state.results.Quotes.map((result) => {
+              return (
+              <div key={result.id}>
+                <p>{result.CarrierId}</p>
+                <p>{result.Name}</p>
+              </div>
+              );
+            })} */}
+          {this.state.results && JSON.stringify(this.state.results.Quotes)}
+          {this.state.results &&
+            this.state.results.Quotes.map((result) => {
+              return (
+              <div key={result.id}>
+                <p>{result.QuoteId}</p>
+                <p>{result.OutboudLeg}</p>
+                <p>{result.MinPrice}</p>   
+              </div>
+              );
+            })}
+        </div>
         <div className="carousels-container">
           <p className="flight-deals-title">Flight Deals For You</p>
           <ImageCarousel />
@@ -148,13 +180,12 @@ class Home extends Component {
 
   onClear = (type) => {
     console.log('i am a string', this.state, [type + 'InputValue']);
-
     this.setState({ [type + 'InputValue']: '' });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/GB/GBP/en-GB/${this.state.originCountrySelection.PlaceId}/${this.state.destinationCountrySelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
+    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/${this.state.country}/${this.state.currency}/${this.state.locale}/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
     const options = {
       method: 'GET',
       url,
@@ -164,10 +195,12 @@ class Home extends Component {
           'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
       },
     };
+    const self = this;
     axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
+        self.setState({ results: response.data });
       })
       .catch(function (error) {
         console.error(error);

@@ -4,7 +4,11 @@ import CountryFlags from './CountryFlags';
 import CurrencySelect from './CurrencySelect';
 
 class Nav extends Component {
-  state = { click: false };
+  state = {
+    click: false,
+    currency: 'GBP',
+    country: 'GB',
+  };
 
   handleClick = () => this.setState({ click: !this.state.click });
 
@@ -74,10 +78,13 @@ class Nav extends Component {
               </NavLink>
             </li>
             <li className="nav-item">
-              <CurrencySelect />
+              <CurrencySelect
+                name="currency"
+                onClick={this.currencySelection}
+              />
             </li>
             <li className="nav-item">
-              <CountryFlags />
+              <CountryFlags name="country" onClick={this.countrySelection} />
             </li>
           </ul>
           <div className="nav-icon" onClick={this.handleClick}>
@@ -86,6 +93,18 @@ class Nav extends Component {
         </div>
       </nav>
     );
+  }
+
+  currencySelection(e) {
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      console.log(this.state);
+    });
+  }
+
+  countrySelection(e) {
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      console.log(this.state);
+    });
   }
 }
 
