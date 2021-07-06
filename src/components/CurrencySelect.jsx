@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class CurrencySelect extends Component {
   state = {};
@@ -7,28 +6,46 @@ class CurrencySelect extends Component {
     return (
       <div className="currency-menu">
         <div className="selected-currency">
-          <p className="display-currency">£</p>
+          <p className="display-currency">
+            {this.props.currency === 'GBP' && '£ GBP'}
+            {this.props.currency === 'USD' && '$ USD'}
+            {this.props.currency === 'CAD' && '$ CAD'}
+            {this.props.currency === 'AUD' && '$ AUD'}
+    
+          </p>
         </div>
         <ul>
           <li>
-            <Link to="#">
-              <p className="currency-symbol nav-links">£ GBP</p>
-            </Link>
+            <p
+              className="currency-symbol nav-links"
+              onClick={() => this.props.currencySelect('GBP')}
+            >
+              £ GBP
+            </p>
           </li>
           <li>
-            <Link to="#">
-              <p className="currency-symbol nav-links">$ USD</p>
-            </Link>
+            <p
+              className="currency-symbol nav-links"
+              onClick={() => this.props.currencySelect('USD')}
+            >
+              $ USD
+            </p>
           </li>
           <li>
-            <Link to="#">
-              <p className="currency-symbol nav-links">$ CAD</p>
-            </Link>
+            <p
+              className="currency-symbol nav-links"
+              onClick={() => this.props.currencySelect('CAD')}
+            >
+              $ CAD
+            </p>
           </li>
           <li>
-            <Link to="#">
-              <p className="currency-symbol nav-links">$ AUD</p>
-            </Link>
+            <p
+              className="currency-symbol nav-links"
+              onClick={() => this.props.currencySelect('AUD')}
+            >
+              $ AUD
+            </p>
           </li>
         </ul>
       </div>

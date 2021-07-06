@@ -19,9 +19,10 @@ class CountryFlags extends Component {
                     countryCode={country.iso2_cc}
                     key={`${country.iso2_cc}_${country.e164_cc}_emoji`}
                     style={{
-                      fontSize: '3em',
+                      fontSize: '2em',
                     }}
                     onClick={this.onClick}
+                    className="country-flag"
                   />
                   <span className="country-name">{this.state.alt}</span>
                 </Link>

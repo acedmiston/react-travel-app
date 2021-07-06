@@ -5,7 +5,15 @@ import Desert from '../images/desert.jpg';
 import GoldenGate from '../images/goldengate.jpg';
 import India from '../images/india.jpg';
 import Scotland from '../images/scotland.jpg';
-import { Link } from 'react-router-dom';
+import Paris from '../images/Paris.jpg';
+import GreatBarrierReef from '../images/greatBarrierReef.JPG';
+import GreatWall from '../images/greatwall.jpg';
+import LA from '../images/LA.jpg';
+import Kyoto from '../images/kyoto.jpg';
+import Mars from '../images/mars.png';
+import NewYork from '../images/newyork.jpg';
+import Peru from '../images/Peru.jpg';
+import London from '../images/London.jpg';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -22,6 +30,15 @@ class ImageCarousel extends Component {
       { id: 3, src: GoldenGate },
       { id: 4, src: India },
       { id: 5, src: Scotland },
+      { id: 6, src: Paris },
+      { id: 7, src: GreatWall },
+      { id: 8, src: GreatBarrierReef },
+      { id: 9, src: LA },
+      { id: 10, src: Kyoto },
+      { id: 11, src: Mars },
+      { id: 12, src: NewYork },
+      { id: 13, src: Peru },
+      { id: 14, src: London },
     ],
   };
 
@@ -46,9 +63,7 @@ class ImageCarousel extends Component {
             {items.map((item) => (
               <div key={item.id} className="carousel-container">
                 <div className="carousel">
-                  <Link to="/hottest-destinations">
-                    <img src={item.src} alt="" className="carousel-img" />
-                  </Link>
+                  <img src={item.src} alt="" className="carousel-img" />
                 </div>
               </div>
             ))}

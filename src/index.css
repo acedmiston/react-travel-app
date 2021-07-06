@@ -445,7 +445,7 @@ main {
 }
 
 .contact-button-holder {
-  margin: 0 auto;
+  display: flex;
 }
 
 .login-form-button {

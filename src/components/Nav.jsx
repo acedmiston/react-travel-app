@@ -80,7 +80,9 @@ class Nav extends Component {
             <li className="nav-item">
               <CurrencySelect
                 name="currency"
-                onClick={this.currencySelection}
+                // onClick={this.currencySelection}
+                currencySelect={this.props.currencySelect}
+                currency={this.props.currency}
               />
             </li>
             <li className="nav-item">
@@ -95,11 +97,11 @@ class Nav extends Component {
     );
   }
 
-  currencySelection(e) {
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state);
-    });
-  }
+  // currencySelection(e) {
+  //   this.setState({ [e.target.name]: e.target.value }, () => {
+  //     console.log(this.state);
+  //   });
+  // }
 
   countrySelection(e) {
     this.setState({ [e.target.name]: e.target.value }, () => {

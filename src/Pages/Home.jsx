@@ -3,12 +3,10 @@ import axios from 'axios';
 import FlightInput from '../components/FlightInput';
 import CovidInfo from '../components/CovidInfo';
 import ImageCarousel from '../components/ImageCarousel';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   state = {
-    country: 'GB',
-    currency: 'GBP',
-    locale: 'en-GB',
     originAirport: { Places: [] },
     destinationAirport: { Places: [] },
     flightDirection: 'return',
@@ -143,7 +141,7 @@ class Home extends Component {
           </div>
         </form>
         <div className="display-results">
-        {/* {this.state.results && JSON.stringify(this.state.results.Carriers)}
+          {/* {this.state.results && JSON.stringify(this.state.results.Carriers)}
           {this.state.results &&
             this.state.results.Quotes.map((result) => {
               return (
@@ -157,21 +155,26 @@ class Home extends Component {
           {this.state.results &&
             this.state.results.Quotes.map((result) => {
               return (
-              <div key={result.id}>
-                <p>{result.QuoteId}</p>
-                <p>{result.OutboudLeg}</p>
-                <p>{result.MinPrice}</p>   
-              </div>
+                <div key={result.id}>
+                  <p>{result.QuoteId}</p>
+                  <p>{result.OutboudLeg}</p>
+                  <p>{result.MinPrice}</p>
+                </div>
               );
             })}
         </div>
         <div className="carousels-container">
           <p className="flight-deals-title">Flight Deals For You</p>
-          <ImageCarousel />
+          <Link to="/flight-deals">
+            <ImageCarousel />
+          </Link>
           <p className="hottest-destinations-title">
             Today's Hottest Destinations
           </p>
-          <ImageCarousel />
+          <Link to="/hottest-destinations">
+            {' '}
+            <ImageCarousel />
+          </Link>
         </div>
         <CovidInfo />
       </>
@@ -179,13 +182,13 @@ class Home extends Component {
   }
 
   onClear = (type) => {
-    console.log('i am a string', this.state, [type + 'InputValue']);
+    // console.log('i am a string', this.state, [type + 'InputValue']);
     this.setState({ [type + 'InputValue']: '' });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/${this.state.country}/${this.state.currency}/${this.state.locale}/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
+    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/GB/${this.props.currency}/en-GB/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
     const options = {
       method: 'GET',
       url,
@@ -229,7 +232,7 @@ class Home extends Component {
     this.setState({ [e.target.id + 'InputValue']: e.target.value });
     const options = {
       method: 'GET',
-      url: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/',
+      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/${this.props.currency}/en-GB/`,
       params: { query: e.target.value },
       headers: {
         'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
@@ -245,6 +248,41 @@ class Home extends Component {
     this.setState({ [id]: result.data });
     console.log(this.state);
   }
+
+  
 }
 
 export default Home;
+
+
+// List markets (countries)
+// const options = {
+//   method: 'GET',
+//   url: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-GB',
+//   headers: {
+//     'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
+//     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com'
+//   }
+// };
+
+// axios.request(options).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });
+
+// currencies 
+// const options = {
+//   method: 'GET',
+//   url: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/currencies',
+//   headers: {
+//     'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
+//     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com'
+//   }
+// };
+
+// axios.request(options).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });

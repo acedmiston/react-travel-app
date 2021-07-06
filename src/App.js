@@ -16,17 +16,26 @@ import Welcome from './Pages/Welcome';
 
 
 class App extends Component {
+  state = {
+    currency: 'GBP',
+  }
+
+  currencySelect = (currency) => {
+    if (currency !== '') this.setState({ currency });
+  }
+
   render() {
+    console.log(this.state);
     return (
       <div className="page-container">
         <Router basename="/">
-          <Nav />
+          <Nav currencySelect={this.currencySelect} currency={this.state.currency} />
           <main>
             <div className="pages">
               <Switch>
                 {/* I need to fix this welcome page to be the first thing, then taken home after login */}
                 <Route path="/welcome" component={Welcome} />
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" render={(props) => <Home currency={this.state.currency} />} />
                 <Route exact path="/blog" component={Blog} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/flight-deals" component={FlightDeals} />
