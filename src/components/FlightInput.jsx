@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class FlightInput extends Component {
   state = {};
   render() {
-    console.log(this.props.value);
 
     return (
       <div className="flight-direction">
@@ -19,6 +18,8 @@ class FlightInput extends Component {
             {this.props.Places.map((option) => {
               return (
                 <li
+                  // is this a correct key?
+                  key={this.props.id}
                   className="airport-list"
                   onClick={() =>
                     this.props.onAirportSelect(option, this.props.type)

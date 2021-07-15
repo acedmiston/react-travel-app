@@ -25,20 +25,20 @@ const breakPoints = [
 class ImageCarousel extends Component {
   state = {
     items: [
-      { id: 1, src: Cliffs },
-      { id: 2, src: Desert },
-      { id: 3, src: GoldenGate },
-      { id: 4, src: India },
-      { id: 5, src: Scotland },
-      { id: 6, src: Paris },
-      { id: 7, src: GreatWall },
-      { id: 8, src: GreatBarrierReef },
-      { id: 9, src: LA },
-      { id: 10, src: Kyoto },
-      { id: 11, src: Mars },
-      { id: 12, src: NewYork },
-      { id: 13, src: Peru },
-      { id: 14, src: London },
+      { id: 1, src: Cliffs, alt: 'Cliffs' },
+      { id: 2, src: Desert, alt: 'Desert' },
+      { id: 3, src: GoldenGate, alt: 'San Francisco' },
+      { id: 4, src: India, alt: 'India' },
+      { id: 5, src: Scotland, alt: 'Scotland' },
+      { id: 6, src: Paris, alt: 'Paris' },
+      { id: 7, src: GreatWall, alt: 'China' },
+      { id: 8, src: GreatBarrierReef, alt: 'Great Barrier Reef' },
+      { id: 9, src: LA, alt: 'Los Angeles' },
+      { id: 10, src: Kyoto, alt: 'Japan' },
+      { id: 11, src: Mars, alt: 'Space X trip' },
+      { id: 12, src: NewYork, alt: 'New York City' },
+      { id: 13, src: Peru, alt: 'Peru' },
+      { id: 14, src: London, alt: 'London' },
     ],
   };
 
@@ -63,7 +63,8 @@ class ImageCarousel extends Component {
             {items.map((item) => (
               <div key={item.id} className="carousel-container">
                 <div className="carousel">
-                  <img src={item.src} alt="" className="carousel-img" />
+                  <p>{item.alt}</p>
+                  <img src={item.src} alt={item.alt} className="carousel-img" />
                 </div>
               </div>
             ))}
@@ -75,24 +76,3 @@ class ImageCarousel extends Component {
 }
 
 export default ImageCarousel;
-
-//shuffle(array){
-// let currentIndex = array.length,
-//   randomIndex;
-
-// // While there remain elements to shuffle...
-// while (0 !== currentIndex) {
-//   // Pick a remaining element...
-//   randomIndex = Math.floor(Math.random() * currentIndex);
-//   currentIndex--;
-
-//   // And swap it with the current element.
-//   [array[currentIndex], array[randomIndex]] = [
-//     array[randomIndex],
-//     array[currentIndex],
-//   ];
-
-// }
-
-// return array;
-//}

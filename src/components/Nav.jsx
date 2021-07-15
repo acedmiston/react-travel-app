@@ -6,8 +6,6 @@ import CurrencySelect from './CurrencySelect';
 class Nav extends Component {
   state = {
     click: false,
-    currency: 'GBP',
-    country: 'GB',
   };
 
   handleClick = () => this.setState({ click: !this.state.click });
@@ -44,7 +42,7 @@ class Nav extends Component {
                 Hottest Destinations
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink
                 exact
                 to="/blog"
@@ -54,7 +52,7 @@ class Nav extends Component {
               >
                 Blog
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink
                 exact
@@ -80,13 +78,20 @@ class Nav extends Component {
             <li className="nav-item">
               <CurrencySelect
                 name="currency"
-                // onClick={this.currencySelection}
                 currencySelect={this.props.currencySelect}
                 currency={this.props.currency}
+                className="nav-links"
+                currencies={this.props.currencies}
               />
             </li>
             <li className="nav-item">
-              <CountryFlags name="country" onClick={this.countrySelection} />
+              <CountryFlags
+                name="country"
+                locales={this.props.locales}
+                selectedLocale={this.props.selectedLocale}
+                setSelectedLocale={this.props.setSelectedLocale}
+                className="nav-links"
+              />
             </li>
           </ul>
           <div className="nav-icon" onClick={this.handleClick}>
@@ -95,18 +100,6 @@ class Nav extends Component {
         </div>
       </nav>
     );
-  }
-
-  // currencySelection(e) {
-  //   this.setState({ [e.target.name]: e.target.value }, () => {
-  //     console.log(this.state);
-  //   });
-  // }
-
-  countrySelection(e) {
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state);
-    });
   }
 }
 

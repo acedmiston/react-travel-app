@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-family: 'Righteous';
   background: #7b83cc;
-  background-image: url('./world-overlay.png');
+  background-image: url('../src/images/world-overlay.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center bottom;
@@ -49,7 +49,7 @@ body {
   max-width: 1000px;
   border-radius: 10px;
   margin: 20px auto 0;
-  padding: 0 0px 0 25px;
+  padding: 0 0 0 25px;
 }
 
 .flight-direction {
@@ -133,7 +133,7 @@ label {
 .navbar-links ul {
   margin: 0;
   padding: 0;
-  display: flex;
+  /* display: flex; */
 }
 
 .nav-menu {
@@ -200,7 +200,7 @@ label {
 }
 
 .covid-title {
-  font-size: 17px;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
 }
@@ -230,10 +230,14 @@ label {
 /* carousel */
 
 .image-slider {
-  margin: 0 100px;
+  margin: 0 auto;
+}
+.carousel {
+  background: lightblue;
 }
 
 .carousel-img {
+  margin: 10px 0 -5px;
   width: 600px;
   height: 300px;
 }
@@ -466,43 +470,35 @@ main {
 
 /* language and currency converters */
 
-.currency-symbol {
-  font-size: 20px;
-  color: #f9c502;
-}
-
-.display-currency {
-  color: #f9c502;
-  font-size: 25px;
-}
-
-.country-name {
+.display-currency,
+.display-country {
   color: #f9c502;
 }
 
 .lang-menu .selected-lang,
 .currency-menu .selected-currency {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
   line-height: 2;
   cursor: pointer;
   position: relative;
 }
-.lang-menu .selected-lang:before {
+/* .lang-menu .selected-lang:before {
   content: '';
   display: inline-block;
-  width: 32px;
+  /* width: 32px;
   height: 32px;
   background-image: url(https://www.countryflags.io/gb/flat/32.png);
   background-size: contain;
-  background-repeat: no-repeat;
-}
-
+  background-repeat: no-repeat; 
+} */
+/* 
 .currency-menu .selected-currency:before {
   content: '';
   display: inline-block;
   color: #f9c502;
-}
+} */
 
 .lang-menu ul {
   margin: 0;
@@ -510,26 +506,29 @@ main {
   display: none;
   background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
   border: 1px solid #f8f8f8;
-  position: absolute;
+  /* position: absolute;
   top: 57px;
-  right: 50px; /* need to sort this out to always be correct*/
-  width: 125px;
+  right: 50px;
+  width: 175px; */
   border-radius: 5px;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 }
 
 .currency-menu ul {
-  margin: 0;
+  margin: 1220px 0 0 0;
   padding: 0;
   display: none;
   background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
   border: 1px solid #f8f8f8;
-  position: absolute;
-  top: 57px;
-  right: 100px; /* need to sort this out to always be correct*/
-  width: 115px;
+  /* position: absolute;
+  top: 47px;
+  right: 10px;
+  width: 115px; */
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  overflow: scroll;
 }
 
 .lang-menu ul li,
@@ -552,7 +551,7 @@ main {
   background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
 } */
 
-.lang-menu ul li a:before,
+/* .lang-menu ul li a:before,
 .currency-menu ul li a::before {
   content: '';
   display: inline-block;
@@ -562,11 +561,13 @@ main {
   margin-right: 10px;
   background-size: contain;
   background-repeat: no-repeat;
-}
+} */
 
 .lang-menu:hover ul,
 .currency-menu:hover ul {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .hottest-destinations-container,
@@ -619,10 +620,17 @@ main {
 .not-found img {
   width: 88%;
   height: auto;
-  margin-left: 50px;
+  margin: 0 auto;
 }
 
 .not-found-link {
   margin: 0 auto;
   text-align: center;
+}
+
+.display-results {
+  margin: 20px auto;
+  background-color: rgba(190, 190, 190, 0.816);
+  max-width: 1000px;
+  border-radius: 10px;
 }

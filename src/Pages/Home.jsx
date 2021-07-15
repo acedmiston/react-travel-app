@@ -3,6 +3,8 @@ import axios from 'axios';
 import FlightInput from '../components/FlightInput';
 import CovidInfo from '../components/CovidInfo';
 import ImageCarousel from '../components/ImageCarousel';
+// import dateFormat from 'dateformat';
+// import Results from '../components/Results';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
@@ -18,9 +20,9 @@ class Home extends Component {
     results: null,
   };
 
-  componentDidUpdate() {
-    console.log(this.state.results);
-  }
+  // componentDidUpdate() {
+  //   console.log(this.state.results);
+  // }
 
   render() {
     return (
@@ -63,19 +65,11 @@ class Home extends Component {
             <div className="input-fields">
               <div>
                 <label>Origin</label>
-                {/* we currently use the text field to store user input and the selected airport after user has chosen from dropdown 
-                we should be storing user input value in state and clearing it when value is selected from the dropdown
-                */}
                 <FlightInput
                   type={'originAirport'}
                   showDropDown={
                     this.state.originAirport.Places.length > 0 && true
                   }
-                  // countrySelection={
-                  //   this.state.originAirportSelection
-                  //     ? this.state.originAirportSelection.PlaceName
-                  //     : ''
-                  // }
                   value={this.state.originAirportInputValue}
                   Places={this.state.originAirport.Places}
                   onInput={this.onInput}
@@ -90,11 +84,6 @@ class Home extends Component {
                   showDropDown={
                     this.state.destinationAirport.Places.length > 0 && true
                   }
-                  // countrySelection={
-                  //   this.state.destinationAirportSelection
-                  //     ? this.state.destinationAirportSelection.PlaceName
-                  //     : ''
-                  // }
                   Places={this.state.destinationAirport.Places}
                   onInput={this.onInput}
                   value={this.state.destinationAirportInputValue}
@@ -140,29 +129,122 @@ class Home extends Component {
             </div>
           </div>
         </form>
+        {/* <Results onClick={this.onSubmit}/> */}
         <div className="display-results">
-          {/* {this.state.results && JSON.stringify(this.state.results.Carriers)}
-          {this.state.results &&
-            this.state.results.Quotes.map((result) => {
+          {/* <label>Results</label> */}
+          {/* {this.state.results &&
+            this.state.results.Carriers.map((result) => {
               return (
-              <div key={result.id}>
-                <p>{result.CarrierId}</p>
-                <p>{result.Name}</p>
-              </div>
+                <div key={result.id} className="results-box">
+                  <p>Carrier Id: {result.CarrierId}</p>
+                  <p>Carrier: {result.Name}</p>
+                </div>
               );
-            })} */}
-          {this.state.results && JSON.stringify(this.state.results.Quotes)}
+            })}
+
           {this.state.results &&
-            this.state.results.Quotes.map((result) => {
+            this.state.results.Currencies.map((result) => {
               return (
-                <div key={result.id}>
-                  <p>{result.QuoteId}</p>
-                  <p>{result.OutboudLeg}</p>
-                  <p>{result.MinPrice}</p>
+                <div key={result.id} className="results-box">
+                  <p>
+                    Currency: {result.Symbol}
+                    {result.Code}
+                  </p>
+                </div>
+              );
+            })}
+
+          {this.state.results !== null && (
+            <div>
+              <p>Outbound: {this.state.results.Places[0].Name}</p>
+              <p>
+                Inbound:
+                {this.state.results.Places.length === 2 &&
+                  this.state.results.Places[1].Name}
+              </p>
+            </div>
+          )} */}
+
+          {this.state.results &&
+            this.state.results.Quotes.map((quote) => {
+              // quote.InboundLeg.CarrierIds // [870, 139]  // British Airways
+
+              const inboundCarrierNames = quote.InboundLeg.CarrierIds.map(
+                (inboundCarrierId) => {
+                  const inboundCarrierFound = this.state.results.Carriers.find(
+                    (inboundCarrier) =>
+                      inboundCarrier.inboundCarrierId === inboundCarrierId
+                  );
+                  const inboundCarrierName = inboundCarrierFound
+                    ? inboundCarrierFound.Name
+                    : '';
+                  return inboundCarrierName;
+                }
+              );
+
+              const outboundCarrierNames = quote.OutboundLeg.CarrierIds.map(
+                (outboundCarrierId) => {
+                  const outboundCarrierFound = this.state.results.Carriers.find(
+                    (outboundCarrier) =>
+                      outboundCarrier.outboundCarrierId === outboundCarrierId
+                  );
+                  const outboundCarrierName = outboundCarrierFound
+                    ? outboundCarrierFound.Name
+                    : '';
+                  return outboundCarrierName;
+                }
+              );
+              // Carriers = [{CarrierId: 139, name: "British Airways"}, {CarrierId: 870, name: "American Airways"}]
+              // we are in one quote as we are mapping through them
+              // quote =
+              // {
+              //   [
+              //   {
+              //     "QuoteId": 1,
+              //     "MinPrice": 331,
+              //     "Direct": false,
+              //     "OutboundLeg": {
+              //         "CarrierIds": [
+              //             870
+              //         ],
+              //         "OriginId": 60987,
+              //         "DestinationId": 65368,
+              //         "DepartureDate": "2021-08-02T00:00:00"
+              //     },
+              //     "InboundLeg": {
+              //         "CarrierIds": [
+              //             870
+              //         ],
+              //         "OriginId": 65368,
+              //         "DestinationId": 60987,
+              //         "DepartureDate": "2021-08-08T00:00:00"
+              //     },
+              //     "QuoteDateTime": "2021-07-10T16:34:00"
+              // }
+              // ]
+              // }
+
+              return (
+                <div key={quote.id} className="results-box">
+                  <p>
+                    Outbound Departure Date: {quote.OutboundLeg.DepartureDate}
+                  </p>
+                  {/* I need a defensive check to make sure there is an inbound flight available */}
+                  <p>
+                    Inbound Departure Date: {quote.InboundLeg.DepartureDate}
+                  </p>
+                  <p>
+                    Direct Flight: {quote.Direct === false ? 'Nope!' : 'Yup!'}
+                  </p>
+                  <p>Lowest Price: {quote.MinPrice}</p>
+                  {/* <p>Quote Date and Time: {quote.QuoteDateTime}</p> */}
+                  <p>{inboundCarrierNames.join(', ')}</p>
+                  <p>{outboundCarrierNames.join(', ')}</p>
                 </div>
               );
             })}
         </div>
+
         <div className="carousels-container">
           <p className="flight-deals-title">Flight Deals For You</p>
           <Link to="/flight-deals">
@@ -172,7 +254,6 @@ class Home extends Component {
             Today's Hottest Destinations
           </p>
           <Link to="/hottest-destinations">
-            {' '}
             <ImageCarousel />
           </Link>
         </div>
@@ -182,7 +263,6 @@ class Home extends Component {
   }
 
   onClear = (type) => {
-    // console.log('i am a string', this.state, [type + 'InputValue']);
     this.setState({ [type + 'InputValue']: '' });
   };
 
@@ -212,23 +292,23 @@ class Home extends Component {
 
   onAirportSelect = (place, type) => {
     // setting object with dynamic key based on a variable
-    console.log(type);
+    // console.log(type);
     this.setState({
       [type + 'Selection']: place,
       [type]: { Places: [] },
       [type + 'InputValue']: place.PlaceName,
     });
-    console.log(place, type);
+    // console.log(place, type);
   };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state);
+      // console.log(this.state);
     });
   };
 
   onInput = (e) => {
-    console.log(e.target.id, e.target.value);
+    // console.log(e.target.id, e.target.value);
     this.setState({ [e.target.id + 'InputValue']: e.target.value });
     const options = {
       method: 'GET',
@@ -246,43 +326,8 @@ class Home extends Component {
   async getAPIData(id, options) {
     const result = await axios.request(options);
     this.setState({ [id]: result.data });
-    console.log(this.state);
+    // console.log(this.state);
   }
-
-  
 }
 
 export default Home;
-
-
-// List markets (countries)
-// const options = {
-//   method: 'GET',
-//   url: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-GB',
-//   headers: {
-//     'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
-//     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com'
-//   }
-// };
-
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });
-
-// currencies 
-// const options = {
-//   method: 'GET',
-//   url: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/currencies',
-//   headers: {
-//     'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
-//     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com'
-//   }
-// };
-
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });
