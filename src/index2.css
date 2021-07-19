@@ -1,37 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-
+​
 * {
   margin: 0;
   padding: 0;
 }
-
+​
 body {
   margin: 0;
   font-family: 'Righteous';
   background: #7b83cc;
-  background-image: url('../src/images/world-overlay.png');
+  background-image: url('./world-overlay.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center bottom;
 }
-
-.tagline-holder {
-  margin: 20px auto;
-}
-
+​
 .home-tagline {
-  font-size: 50px;
-  text-align: center;
-  text-shadow: 2px 2px #f9c502;
+  font-size: 30px;
+  margin: 20px 110px -10px;
 }
-
+​
 .input-fields {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
-
+​
 .outer-box input:not(.form-check-input) {
   background-color: rgb(255, 255, 255);
   height: 2.4rem;
@@ -41,7 +36,7 @@ body {
   background: #fff;
   font-family: 'Righteous';
 }
-
+​
 .outer-box {
   background-color: rgba(190, 190, 190, 0.816);
   display: flex;
@@ -50,33 +45,32 @@ body {
   max-width: 1000px;
   border-radius: 10px;
   margin: 20px auto 0;
-  padding: 0 0 0 25px;
 }
-
+​
 .flight-direction {
   position: relative;
   border-radius: 10px;
 }
-
+​
 .flight-direction > .drop-down {
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
-
+​
 .airport-list {
   list-style-type: none;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   line-height: 2rem;
   width: 230px;
 }
-
+​
 .button-holder {
   display: flex;
   flex-wrap: wrap;
 }
-
+​
 .results-button {
   width: 400px;
   height: 50px;
@@ -88,19 +82,19 @@ body {
   font-weight: bold;
   transition-duration: 0.4s;
 }
-
+​
 .results-button:hover {
   background-color: #60a101;
-  color: rgb(255, 255, 255);
+  color: white;
 }
-
+​
 label {
   font-size: 12px;
   font-weight: bold;
 }
-
+​
 /* navbar */
-
+​
 .navbar {
   display: flex;
   justify-content: center;
@@ -112,7 +106,7 @@ label {
   height: 70px;
   background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
 }
-
+​
 .nav-container {
   display: flex;
   justify-content: center;
@@ -121,7 +115,7 @@ label {
   height: 70px;
   max-width: 1500px;
 }
-
+​
 .nav-logo {
   color: #f9c502;
   align-items: center;
@@ -134,16 +128,16 @@ label {
 .navbar-links ul {
   margin: 0;
   padding: 0;
-  /* display: flex; */
+  display: flex;
 }
-
+​
 .nav-menu {
   display: flex;
   list-style: none;
   text-align: center;
   align-items: center;
 }
-
+​
 .nav-links {
   color: #f9c502;
   text-decoration: none;
@@ -151,12 +145,12 @@ label {
   height: 100%;
   border-bottom: 3px solid transparent;
 }
-
+​
 .nav-item {
   line-height: 40px;
   margin-right: 1rem;
 }
-
+​
 .nav-item:after {
   content: '';
   display: block;
@@ -165,138 +159,49 @@ label {
   background: transparent;
   transition: width 0.7s ease, background-color 0.5s ease;
 }
-
+​
 .nav-item:hover:after {
   width: 100%;
   background: #f9c502;
 }
-
+​
 .nav-item .active {
   border: 1px solid #00c0db;
 }
-
+​
 .nav-icon {
   display: none;
 }
-
-/* language and currency converters */
-
-.display-currency,
-.display-country {
-  color: #f9c502;
-}
-
-.lang-menu .selected-lang,
-.currency-menu .selected-currency {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between; */
-  line-height: 2;
-  cursor: pointer;
-  position: relative;
-}
-/* .lang-menu .selected-lang:before {
-  content: '';
-  display: inline-block;
-  /* width: 32px;
-  height: 32px;
-  background-image: url(https://www.countryflags.io/gb/flat/32.png);
-  background-size: contain;
-  background-repeat: no-repeat; 
-} */
-/* 
-.currency-menu .selected-currency:before {
-  content: '';
-  display: inline-block;
-  color: #f9c502;
-} */
-
-/* .lang-menu ul {
-  margin: 0;
-  padding: 0;
-  display: none;
-  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
-  border: 1px solid #f8f8f8;
-  /* position: absolute;
-  top: 57px;
-  right: 50px;
-  width: 175px; */
-/* border-radius: 5px;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-} */
-
-.currency-menu ul {
-  margin: 800px 0 0 0;
-  padding: 0;
-  display: none;
-  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
-  /* border: 1px solid #f8f8f8; */
-  /* position: absolute;
-  top: 47px;
-  right: 10px;
-  width: 115px; */
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-}
-
-.currency-menu ul li {
-  list-style: none;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-  outline: solid #00ff00;
-  font-size: 12px;
-}
-
-.currency-menu ul li a {
-  text-decoration: none;
-  width: 125px;
-  padding: 5px 10px;
-  display: block;
-}
-
-.currency-menu:hover ul {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow: auto;
-}
-
+​
 /* covid information */
-
+​
 .covid-boxes {
   background-color: rgba(190, 190, 190, 0.816);
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  margin: 100px auto 0;
-  width: 85%;
+  margin: 100px auto 0px;
 }
-
+​
 .covid-box {
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
   display: flex;
   align-content: space-between;
   flex-wrap: wrap;
   flex-direction: row;
-  padding: 0 7px;
 }
-
+​
 .covid-title {
-  font-size: 1.3rem;
+  font-size: 17px;
   font-weight: bold;
-  text-align: center;
 }
-
+​
 .covid-text {
   font-size: 16px;
   padding: 15px 5px;
-  text-align: center;
 }
-
+​
 .covid-buttons {
   border-radius: 10px;
   background-color: #00c0db;
@@ -305,40 +210,26 @@ label {
   font-weight: bold;
   transition-duration: 0.4s;
   width: 200px;
-  margin: 0 auto;
 }
-
+​
 .covid-buttons:hover {
   background-color: #60a101;
   color: white;
 }
-
+​
 /* carousel */
-
+​
 .image-slider {
-  margin: 0 auto;
+  margin: 0 100px;
 }
-.carousel {
-  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
-}
-
-.carousel-titles {
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  color: #f9c502;
-  padding: 5px;
-}
-
+​
 .carousel-img {
-  margin: 10px 0 -5px;
   width: 600px;
   height: 300px;
 }
-
+​
 /* footer */
-
+​
 footer {
   background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
   width: 100%;
@@ -351,19 +242,19 @@ footer {
   font-size: 20px;
   flex-shrink: 0;
 }
-
+​
 /* radio buttons */
-
+​
 .radio-container {
   display: flex;
   flex-wrap: wrap;
   margin: 10px 60px 5px;
 }
-
+​
 .radio {
   padding: 0 10px 5px;
 }
-
+​
 .radio-label {
   position: relative;
   display: inline-block;
@@ -383,7 +274,7 @@ footer {
   border: 3px solid #8f90a0;
   border-radius: 1.125rem;
 }
-
+​
 .form-check-input:checked {
   border-color: #00c0db;
 }
@@ -408,25 +299,7 @@ footer {
   border-radius: 50%;
   background: #00c0db;
 }
-
-@media screen and (max-width: 1040px) {
-  .covid-boxes {
-    display: flex;
-    flex-direction: column;
-    margin: 20px auto -20px;
-    width: 80%;
-  }
-
-  .covid-box:after {
-    content: '';
-    width: 100%;
-    height: 3px;
-    position: relative;
-    background: black;
-    margin: 8px 0;
-  }
-}
-
+​
 @media screen and (max-width: 960px) {
   .nav-menu {
     display: flex;
@@ -439,7 +312,7 @@ footer {
     opacity: 1;
     transition: all 0.5s ease;
   }
-
+​
   .nav-menu.active {
     background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
     left: 0px;
@@ -456,7 +329,7 @@ footer {
     width: 100%;
     display: table;
   }
-
+​
   .nav-icon {
     display: block;
     position: absolute;
@@ -467,34 +340,36 @@ footer {
     cursor: pointer;
     color: #ffdd40;
   }
-
-  .results-button {
-    width: 300px;
+  .covid-boxes {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -20px;
   }
-
-  .login-form-button {
-    margin: 5px auto;
-  }
-
-  .image-slider {
-    margin: 0 auto;
+​
+  .covid-box:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    position: relative;
+    background: black;
+    margin: 8px 0;
   }
 }
-
+​
 .page-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
-
+​
 nav {
   flex-shrink: 0;
 }
-
+​
 main {
   flex: 1 0 auto;
 }
-
+​
 .contact-container {
   margin: 25px auto;
   max-width: 700px;
@@ -502,14 +377,14 @@ main {
   background-color: rgba(190, 190, 190, 0.816);
   border-radius: 15px;
 }
-
+​
 .title-holder {
   text-align: center;
   position: relative;
   padding: 0 0 20px;
   margin: 0 0 15px;
 }
-
+​
 .title-holder:after {
   transform: translateX(-50%);
   content: '';
@@ -520,12 +395,12 @@ main {
   height: 3px;
   width: 400px;
 }
-
+​
 .title-holder h2 {
   font-size: 28px;
   margin: 0;
 }
-
+​
 .ant-input {
   width: 95%;
   margin: 5px auto;
@@ -537,170 +412,205 @@ main {
   background: #fff;
   font-family: 'Righteous';
 }
-
+​
 .contactBlock textarea {
   min-height: 120px;
   height: 120px;
 }
-
-.contact-button-holder {
-  display: flex;
-}
-
+​
 .login-form-button {
-  width: 80%;
+  width: 400px;
   height: 50px;
-  margin: 10px auto;
+  margin: 10px 140px;
   border-radius: 10px;
   background-color: #00c0db;
   font-size: 26px;
   font-weight: bold;
   transition-duration: 0.4s;
 }
-
+​
 .login-form-button:hover {
   background-color: #60a101;
   color: white;
 }
-
+​
+/* language and currency converters */
+/* !! Changes from here ... */
+.currency-symbol {
+  font-size: 16px;
+  color: #f9c502;
+  padding: 0 5px;
+}
+​
+.display-currency {
+  color: #f9c502;
+  font-size: 16px;
+}
+/* !! ending here */
+​
+.country-name {
+  color: #f9c502;
+}
+​
+.lang-menu .selected-lang,
+.currency-menu .selected-currency {
+  display: flex;
+  justify-content: space-between;
+  line-height: 2;
+  cursor: pointer;
+}
+.lang-menu .selected-lang:before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url(https://www.countryflags.io/us/flat/32.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+​
+.currency-menu .selected-currency:before {
+  content: '';
+  display: inline-block;
+  color: #f9c502;
+}
+​
+.lang-menu ul {
+  margin: 0;
+  padding: 0;
+  display: none;
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
+  border: 1px solid #f8f8f8;
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  width: 125px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+​
+/* !! Changes from here ... */
+​
+.currency-menu ul {
+  margin: 0;
+  padding: 0;
+  /* display: none; */
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
+  border: 1px solid #f8f8f8;
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  height: 150px;
+  width: 400px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  /* overflow: scroll; */
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: scroll;
+}
+​
+.lang-menu ul li,
+.currency-menu ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  /* border: 1px solid red; */
+  width: 60px;
+  padding: 10px;
+}
+​
+.lang-menu ul li a,
+.currency-menu ul li a {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  /* width: 125px;
+  padding: 5px 10px; */
+  /* display: block; */
+}
+​
+/* .lang-menu ul li:hover, .currency-menu ul li:hover {
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
+} */
+​
+/* .lang-menu ul li a:before,
+.currency-menu ul li a::before {
+  content: '';
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+} */
+​
+.lang-menu:hover ul,
+.currency-menu:hover ul {
+  /* display: block; */
+}
+​
+/* !! ending here */
+​
 .hottest-destinations-container,
 .flight-deals-container {
   margin: 120px auto 0;
 }
-
+​
 .hottest-destinations-title,
 .flight-deals-title {
-  text-align: center;
-  font-size: 40px;
-  padding: 15px 0;
-  text-shadow: 2px 2px #f9c502;
+  padding: 0 0 10px 160px;
+  font-size: 30px;
 }
-
+​
 .carousels-container {
-  margin: 120px 0 0 0;
+  margin: 320px 0 0 0;
 }
-
+​
 .not-found {
   background-color: rgba(160, 142, 142, 0.781);
   margin: 100px auto;
   width: 80%;
   border-radius: 10px;
 }
-
+​
 .not-found h2 {
-  color: #f9c502;
+  color: gold;
   margin: 10px auto;
   text-align: center;
   font-size: 40px;
 }
 .not-found p {
-  color: #f9c502;
+  color: gold;
   margin: 10px auto;
   text-align: center;
   font-size: 32px;
 }
-
+​
 .not-found a {
   font-size: 28px;
   text-decoration: none;
   color: rgba(8, 8, 8, 0.914);
   text-align: center;
 }
-
+​
 .not-found a:hover {
-  color: #f9c502;
+  color: gold;
 }
-
+​
 /* not responsive need to fix to center */
 .not-found img {
   width: 88%;
   height: auto;
-  margin: 0 auto;
+  margin-left: 50px;
 }
-
+​
 .not-found-link {
   margin: 0 auto;
   text-align: center;
-}
-
-.display-results {
-  margin: 20px auto;
-  max-width: 1026px;
-}
-
-.results-box {
-  background-color: rgba(190, 190, 190, 0.816);
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.flight-direct,
-.airplane-icon {
-  display: flex;
-  align-items: center;
-}
-
-.inbound-trip,
-.outbound-trip {
-  color: #f9c502;
-  text-shadow: 2px 2px #000000;
-  /* background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914)); */
-}
-
-.inbound-trip{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-/* .depart-time {
-  padding: 0 0 10px;
-} */
-
-.airplane-icon {
-  color: #f9c502;
-  text-shadow: 2px 2px #000000;
-  font-size: 25px;
-}
-
-.flight-price {
-  font-size: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.land-date,
-.depart-date {
-  font-size: 24px;
-}
-
-/* .inbound-trip .depart-time,
-.inbound-trip .land-time{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
-
-.flight-button {
-  width: 120px;
-  height: 45px;
-  margin: 10px;
-  border-radius: 10px;
-  background-color: #00c0db;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  transition-duration: 0.4s;
-}
-
-.flight-button:hover {
-  background-color: #60a101;
-  color: rgb(255, 255, 255);
 }

@@ -25,20 +25,25 @@ const breakPoints = [
 class ImageCarousel extends Component {
   state = {
     items: [
-      { id: 1, src: Cliffs, alt: 'Cliffs' },
-      { id: 2, src: Desert, alt: 'Desert' },
-      { id: 3, src: GoldenGate, alt: 'San Francisco' },
-      { id: 4, src: India, alt: 'India' },
-      { id: 5, src: Scotland, alt: 'Scotland' },
-      { id: 6, src: Paris, alt: 'Paris' },
-      { id: 7, src: GreatWall, alt: 'China' },
-      { id: 8, src: GreatBarrierReef, alt: 'Great Barrier Reef' },
-      { id: 9, src: LA, alt: 'Los Angeles' },
-      { id: 10, src: Kyoto, alt: 'Japan' },
-      { id: 11, src: Mars, alt: 'Space X trip' },
-      { id: 12, src: NewYork, alt: 'New York City' },
-      { id: 13, src: Peru, alt: 'Peru' },
-      { id: 14, src: London, alt: 'London' },
+      { id: 1, src: Cliffs, alt: 'Ireland', text: 'Ireland' },
+      { id: 2, src: Desert, alt: 'Mojave Desert', text: 'Mojave Desert' },
+      { id: 3, src: GoldenGate, alt: 'San Francisco', text: 'San Francisco' },
+      { id: 4, src: India, alt: 'India', text: 'India' },
+      { id: 5, src: Scotland, alt: 'Scotland', text: 'Scotland' },
+      { id: 6, src: Paris, alt: 'Paris', text: 'Paris' },
+      { id: 7, src: GreatWall, alt: 'China', text: 'China' },
+      {
+        id: 8,
+        src: GreatBarrierReef,
+        alt: 'Great Barrier Reef',
+        text: 'Great Barrier Reef',
+      },
+      { id: 9, src: LA, alt: 'Los Angeles', text: 'Los Angeles' },
+      { id: 10, src: Kyoto, alt: 'Japan', text: 'Japan' },
+      { id: 11, src: Mars, alt: 'Space X trip', text: 'Space X trip' },
+      { id: 12, src: NewYork, alt: 'New York City', text: 'New York City' },
+      { id: 13, src: Peru, alt: 'Peru', text: 'Peru' },
+      { id: 14, src: London, alt: 'London', text: 'London' },
     ],
   };
 
@@ -63,7 +68,7 @@ class ImageCarousel extends Component {
             {items.map((item) => (
               <div key={item.id} className="carousel-container">
                 <div className="carousel">
-                  <p>{item.alt}</p>
+                  <p className="carousel-titles">{item.text}</p>
                   <img src={item.src} alt={item.alt} className="carousel-img" />
                 </div>
               </div>

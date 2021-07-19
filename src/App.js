@@ -10,7 +10,7 @@ import Home from './Pages/Home';
 import Contact from './Pages/Contact';
 import HottestDestinations from './Pages/HottestDestinations';
 import Footer from './components/Footer';
-// import Blog from './Pages/Blog';
+// import Stories from './Pages/Stories';
 import NotFound from './Pages/NotFound';
 import axios from 'axios';
 
@@ -18,8 +18,7 @@ import axios from 'axios';
 class App extends Component {
   state = {
     currency: 'GBP',
-    locales: [],
-    selectedLocale: 'en-GB'
+    currencies: '',
   }
 
   componentDidMount() {
@@ -38,17 +37,8 @@ class App extends Component {
 
       this.setState({ currencies: data.Currencies });
     };
-    // //Grab all country options from the API
-    // const fetchCountries = async () => {
-    //   const { data } = await axios.get(
-    //     "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-GB", options
-    //   );
-    //   //set the countries
-    //   this.setState({ locales: data.Countries })
-    // };
-    //Run functions
+
     fetchCurrencies();
-    // fetchCountries();
   }
 
   //set selected currency for nav
@@ -62,6 +52,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("currency test", this.state.currency);
     return (
       <div className="page-container">
         <Router basename="/">
@@ -70,7 +61,7 @@ class App extends Component {
             <div className="pages">
               <Switch>
                 <Route exact path="/" render={(props) => <Home currency={this.state.currency} currencies={this.state.currencies} selectedLocale={this.state.selectedLocale} />} />
-                {/* <Route exact path="/blog" component={Blog} /> */}
+                {/* <Route exact path="/stories" component={Stories} /> */}
                 <Route path="/contact" component={Contact} />
                 <Route path="/flight-deals" component={FlightDeals} />
                 <Route path="/hottest-destinations" component={HottestDestinations} />

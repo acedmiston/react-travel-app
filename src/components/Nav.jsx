@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import CountryFlags from './CountryFlags';
+// import CountryFlags from './CountryFlags';
 import CurrencySelect from './CurrencySelect';
 
 class Nav extends Component {
@@ -45,12 +45,12 @@ class Nav extends Component {
             {/* <li className="nav-item">
               <NavLink
                 exact
-                to="/blog"
+                to="/stories"
                 activeClassName="active"
                 className="nav-links"
                 onClick={this.handleClick}
               >
-                Blog
+                Stories
               </NavLink>
             </li> */}
             <li className="nav-item">
@@ -84,7 +84,7 @@ class Nav extends Component {
                 currencies={this.props.currencies}
               />
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <CountryFlags
                 name="country"
                 locales={this.props.locales}
@@ -92,7 +92,7 @@ class Nav extends Component {
                 setSelectedLocale={this.props.setSelectedLocale}
                 className="nav-links"
               />
-            </li>
+            </li> */}
           </ul>
           <div className="nav-icon" onClick={this.handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'}></i>

@@ -25,6 +25,19 @@ class Home extends Component {
   // }
 
   render() {
+    const {
+      outBoundDate,
+      inBoundDate,
+      numberNomaders,
+      originAirportInputValue,
+      destinationAirportInputValue,
+    } = this.state;
+    const isEnabled =
+      outBoundDate.length > 0 &&
+      inBoundDate.length > 0 &&
+      numberNomaders.length > 0 &&
+      originAirportInputValue.length > 0 &&
+      destinationAirportInputValue.length > 0;
     return (
       <>
         <div className="tagline-holder">
@@ -119,24 +132,26 @@ class Home extends Component {
                     className="number-input"
                     name="numberNomaders"
                     type="number"
+                    min="0"
                     onChange={this.onChange}
                   ></input>
                 </div>
               </div>
-              <button className="results-button" onClick={this.onSubmit}>
+              <button
+                className="results-button"
+                onClick={this.onSubmit}
+                disabled={!isEnabled}
+              >
                 Let's go! <i className="fas fa-plane"></i>
               </button>
             </div>
           </div>
         </form>
-        {/* <Results onClick={this.onSubmit}/> */}
         <div className="display-results">
-          {/* <label>Results</label> */}
           {/* {this.state.results &&
             this.state.results.Carriers.map((result) => {
               return (
                 <div key={result.id} className="results-box">
-                  <p>Carrier Id: {result.CarrierId}</p>
                   <p>Carrier: {result.Name}</p>
                 </div>
               );
@@ -152,22 +167,28 @@ class Home extends Component {
                   </p>
                 </div>
               );
-            })}
-
-          {this.state.results !== null && (
-            <div>
-              <p>Outbound: {this.state.results.Places[0].Name}</p>
-              <p>
-                Inbound:
-                {this.state.results.Places.length === 2 &&
-                  this.state.results.Places[1].Name}
-              </p>
-            </div>
-          )} */}
+            })} */}
 
           {this.state.results &&
             this.state.results.Quotes.map((quote) => {
-              // quote.InboundLeg.CarrierIds // [870, 139]  // British Airways
+              const inboundDateFormat = new Date(
+                quote.InboundLeg.DepartureDate
+              ).toDateString();
+              const outboundDateFormat = new Date(
+                quote.OutboundLeg.DepartureDate
+              ).toDateString();
+              const inboundTimeFormat = new Date(
+                quote.InboundLeg.DepartureDate
+              ).toLocaleTimeString(navigator.language, {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
+              const outboundTimeFormat = new Date(
+                quote.OutboundLeg.DepartureDate
+              ).toLocaleTimeString(navigator.language, {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
 
               const inboundCarrierNames = quote.InboundLeg.CarrierIds.map(
                 (inboundCarrierId) => {
@@ -194,52 +215,52 @@ class Home extends Component {
                   return outboundCarrierName;
                 }
               );
-              // Carriers = [{CarrierId: 139, name: "British Airways"}, {CarrierId: 870, name: "American Airways"}]
-              // we are in one quote as we are mapping through them
-              // quote =
-              // {
-              //   [
-              //   {
-              //     "QuoteId": 1,
-              //     "MinPrice": 331,
-              //     "Direct": false,
-              //     "OutboundLeg": {
-              //         "CarrierIds": [
-              //             870
-              //         ],
-              //         "OriginId": 60987,
-              //         "DestinationId": 65368,
-              //         "DepartureDate": "2021-08-02T00:00:00"
-              //     },
-              //     "InboundLeg": {
-              //         "CarrierIds": [
-              //             870
-              //         ],
-              //         "OriginId": 65368,
-              //         "DestinationId": 60987,
-              //         "DepartureDate": "2021-08-08T00:00:00"
-              //     },
-              //     "QuoteDateTime": "2021-07-10T16:34:00"
-              // }
-              // ]
-              // }
 
               return (
                 <div key={quote.id} className="results-box">
-                  <p>
-                    Outbound Departure Date: {quote.OutboundLeg.DepartureDate}
-                  </p>
+                  <div className="outbound-trip">
+                    <div className="depart-date">{outboundDateFormat}</div>
+                    <div className="depart-time">{outboundTimeFormat}{this.state.results.Places.SkyscannerCode}</div>
+                    <div className="origin-city">
+                      {this.state.originAirportInputValue}
+                    </div>
+                    <br></br>
+                    <div className="land-date">{inboundDateFormat}</div>
+                    <div className="land-time">{inboundTimeFormat}</div>
+                    <div className="origin-city">
+                      {this.state.destinationAirportInputValue}
+                    </div>
+                  </div>
+                  <div className="flight-direct">
+                    {quote.Direct === false ? 'Not Direct' : 'Direct'}
+                  </div>
+                  <div className="airplane-icon">
+                    {' '}
+                    - - - - -<i className="fas fa-plane"></i>
+                  </div>
                   {/* I need a defensive check to make sure there is an inbound flight available */}
-                  <p>
-                    Inbound Departure Date: {quote.InboundLeg.DepartureDate}
-                  </p>
-                  <p>
-                    Direct Flight: {quote.Direct === false ? 'Nope!' : 'Yup!'}
-                  </p>
-                  <p>Lowest Price: {quote.MinPrice}</p>
-                  {/* <p>Quote Date and Time: {quote.QuoteDateTime}</p> */}
-                  <p>{inboundCarrierNames.join(', ')}</p>
-                  <p>{outboundCarrierNames.join(', ')}</p>
+                  <div className="inbound-trip">
+                    {/* <div className="depart-date">{outboundDateFormat}</div> */}
+                    <div className="depart-time">{outboundTimeFormat}</div>
+                    <div className="destination-city">
+                      {this.state.destinationAirportInputValue}
+                    </div>
+                    <br></br>
+                    {/* <div className="land-date">{inboundDateFormat}</div> */}
+                    <div className="land-time">{inboundTimeFormat}</div>
+                    <div className="destination-city">
+                      {this.state.originAirportInputValue}
+                    </div>
+                  </div>
+                  <div className="flight-price">
+                    {/* need to fix the currency to be accurate */}
+                    {this.props.currency} {quote.MinPrice}
+                    <button className="flight-button">Pick me!</button>
+                  </div>
+
+                  {/* these below are not rendering */}
+                  {/* <p>{inboundCarrierNames.join(', ')}</p>
+                  <p>{outboundCarrierNames.join(', ')}</p> */}
                 </div>
               );
             })}

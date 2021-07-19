@@ -18,9 +18,10 @@ class CurrencySelect extends Component {
                   {/* html entity needed for currency symbol so all comps can see it */}
                   <p
                     className="nav-links"
-                    onClick={() =>
-                      this.props.currencySelect(currency.Symbol, currency.Code)
-                    }
+                    onClick={() => {
+                      this.props.currencySelect(currency.Code);
+                      console.log(currency);
+                    }}
                   >
                     {currency.Symbol} {currency.Code}
                   </p>
