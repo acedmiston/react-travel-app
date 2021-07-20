@@ -68,7 +68,9 @@ class ImageCarousel extends Component {
             {items.map((item) => (
               <div key={item.id} className="carousel-container">
                 <div className="carousel">
-                  <p className="carousel-titles">{item.text}</p>
+                  <p className="carousel-titles">
+                    {item.text} £{Math.floor(Math.random() * 1000)}
+                  </p>
                   <img src={item.src} alt={item.alt} className="carousel-img" />
                 </div>
               </div>

@@ -629,7 +629,7 @@ main {
 }
 
 .results-box {
-  background-color: rgba(190, 190, 190, 0.816);
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
   padding: 10px;
   border-radius: 10px;
   margin: 10px 0;
@@ -642,8 +642,10 @@ main {
 .airplane-icon {
   display: flex;
   align-items: center;
+  color: #f9c502;
 }
 
+.flight-carriers,
 .inbound-trip,
 .outbound-trip {
   color: #f9c502;
@@ -651,15 +653,20 @@ main {
   /* background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914)); */
 }
 
+.outbound-trip p{
+  font-size: 14px;
+}
+
+.depart-time,
+.land-time{
+  padding: 10px 0;
+}
+
 .inbound-trip{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-
-/* .depart-time {
-  padding: 0 0 10px;
-} */
 
 .airplane-icon {
   color: #f9c502;
@@ -673,6 +680,8 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-left: 2px solid #f9c502;
+  color: #f9c502;
 }
 
 .land-date,
@@ -703,4 +712,11 @@ main {
 .flight-button:hover {
   background-color: #60a101;
   color: rgb(255, 255, 255);
+}
+
+
+.flight-directions{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;  
 }
