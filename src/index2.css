@@ -614,3 +614,172 @@ main {
   margin: 0 auto;
   text-align: center;
 }
+
+
+
+
+REAL NAVBAR! DONT DELETE
+
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  height: 70px;
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  max-width: 1500px;
+}
+
+.nav-logo {
+  color: #f9c502;
+  align-items: center;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  flex-grow: 1;
+}
+.navbar-links ul {
+  margin: 0;
+  padding: 0;
+  /* display: flex; */
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  align-items: center;
+}
+
+.nav-links {
+  color: #f9c502;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-item {
+  line-height: 40px;
+  margin-right: 1rem;
+}
+
+.nav-item:after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: width 0.7s ease, background-color 0.5s ease;
+}
+
+.nav-item:hover:after {
+  width: 100%;
+  background: #f9c502;
+}
+
+.nav-item .active {
+  border: 1px solid #00c0db;
+}
+
+.nav-icon {
+  display: none;
+}
+
+/* language and currency converters */
+
+.display-currency,
+.display-country {
+  color: #f9c502;
+}
+
+.lang-menu .selected-lang,
+.currency-menu .selected-currency {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+  line-height: 2;
+  cursor: pointer;
+  position: relative;
+}
+/* .lang-menu .selected-lang:before {
+  content: '';
+  display: inline-block;
+  /* width: 32px;
+  height: 32px;
+  background-image: url(https://www.countryflags.io/gb/flat/32.png);
+  background-size: contain;
+  background-repeat: no-repeat; 
+} */
+/* 
+.currency-menu .selected-currency:before {
+  content: '';
+  display: inline-block;
+  color: #f9c502;
+} */
+
+/* .lang-menu ul {
+  margin: 0;
+  padding: 0;
+  display: none;
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
+  border: 1px solid #f8f8f8;
+  /* position: absolute;
+  top: 57px;
+  right: 50px;
+  width: 175px; */
+/* border-radius: 5px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+} */
+
+.currency-menu ul {
+  margin: 800px 0 0 0;
+  padding: 0;
+  display: none;
+  background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
+  /* border: 1px solid #f8f8f8; */
+  /* position: absolute;
+  top: 47px;
+  right: 10px;
+  width: 115px; */
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.currency-menu ul li {
+  list-style: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  outline: solid #00ff00;
+  font-size: 12px;
+}
+
+.currency-menu ul li a {
+  text-decoration: none;
+  width: 125px;
+  padding: 5px 10px;
+  display: block;
+}
+
+.currency-menu:hover ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: auto;
+}

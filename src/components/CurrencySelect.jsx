@@ -7,7 +7,7 @@ class CurrencySelect extends Component {
     return (
       <div className="currency-menu">
         <div className="selected-currency">
-          <p className="display-currency">{this.props.currency}</p>
+          {/* <p className="display-currency">{this.props.currency}</p> */}
         </div>
         <ul>
           {this.props.currencies &&

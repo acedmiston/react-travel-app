@@ -80,8 +80,8 @@ class Nav extends Component {
                 name="currency"
                 currencySelect={this.props.currencySelect}
                 currency={this.props.currency}
-                className="nav-links"
                 currencies={this.props.currencies}
+                className="nav-links"
               />
             </li>
             {/* <li className="nav-item">

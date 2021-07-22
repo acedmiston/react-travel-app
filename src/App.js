@@ -4,7 +4,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Nav from './components/Nav';
+// import Nav from './components/Nav';
 import FlightDeals from './Pages/FlightDeals';
 import Home from './Pages/Home';
 import Contact from './Pages/Contact';
@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 // import Stories from './Pages/Stories';
 import NotFound from './Pages/NotFound';
 import axios from 'axios';
-
+import Navbar from './components/Navbar';
 
 class App extends Component {
   state = {
@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <div className="page-container">
         <Router basename="/">
-          <Nav currencySelect={this.currencySelect} currency={this.state.currency} currencies={this.state.currencies} locales={this.state.locales} selectedLocale={this.state.selectedLocale} setSelectedLocale={this.setSelectedLocale} />
+          <Navbar currencySelect={this.currencySelect} currency={this.state.currency} currencies={this.state.currencies} locales={this.state.locales} selectedLocale={this.state.selectedLocale} setSelectedLocale={this.setSelectedLocale} />
           <main>
             <div className="pages">
               <Switch>

@@ -3,9 +3,9 @@ import axios from 'axios';
 import FlightInput from '../components/FlightInput';
 import CovidInfo from '../components/CovidInfo';
 import ImageCarousel from '../components/ImageCarousel';
-// import dateFormat from 'dateformat';
 // import Results from '../components/Results';
 import { Link } from 'react-router-dom';
+import love from '../images/Love.jpg';
 
 class Home extends Component {
   state = {
@@ -36,6 +36,9 @@ class Home extends Component {
       destinationAirportInputValue.length > 0;
     return (
       <>
+        <div className="background-box">
+          <img src={love} alt="background" className="background" />
+        </div>
         <div className="tagline-holder">
           <p className="home-tagline">Where will you go next?</p>
         </div>
@@ -144,27 +147,6 @@ class Home extends Component {
           </div>
         </form>
         <div className="display-results">
-          {/* {this.state.results &&
-            this.state.results.Carriers.map((result) => {
-              return (
-                <div key={result.id} className="results-box">
-                  <p>Carrier: {result.Name}</p>
-                </div>
-              );
-            })}
-
-          {this.state.results &&
-            this.state.results.Currencies.map((result) => {
-              return (
-                <div key={result.id} className="results-box">
-                  <p>
-                    Currency: {result.Symbol}
-                    {result.Code}
-                  </p>
-                </div>
-              );
-            })} */}
-
           {this.state.results &&
             this.state.results.Quotes.map((quote) => {
               const inboundDateFormat = new Date(
@@ -185,33 +167,31 @@ class Home extends Component {
                 hour: '2-digit',
                 minute: '2-digit',
               });
-
-              // const inboundCarrierNames = quote.InboundLeg.CarrierIds.map(
-              //   (inboundCarrierId) => {
-              //     const inboundCarrierFound = this.state.results.Carriers.find(
-              //       (inboundCarrier) =>
-              //         inboundCarrier.inboundCarrierId === inboundCarrierId
-              //     );
-              //     const inboundCarrierName = inboundCarrierFound
-              //       ? inboundCarrierFound.Name
-              //       : '';
-              //     return inboundCarrierName;
-              //   }
-              // );
-
-              // const outboundCarrierNames = quote.OutboundLeg.CarrierIds.map(
-              //   (outboundCarrierId) => {
-              //     const outboundCarrierFound = this.state.results.Carriers.find(
-              //       (outboundCarrier) =>
-              //         outboundCarrier.outboundCarrierId === outboundCarrierId
-              //     );
-              //     const outboundCarrierName = outboundCarrierFound
-              //       ? outboundCarrierFound.Name
-              //       : '';
-              //     return outboundCarrierName;
-              //   }
-              // );
-
+              console.log(quote);
+              const inboundCarrierNames = quote.InboundLeg.CarrierIds.map(
+                (quoteCarrierId) => {
+                  const inboundCarrierFound = this.state.results.Carriers.find(
+                    (inboundCarrier) =>
+                      inboundCarrier.CarrierId === quoteCarrierId
+                  );
+                  const inboundCarrierName = inboundCarrierFound
+                    ? inboundCarrierFound.Name
+                    : '';
+                  return inboundCarrierName;
+                }
+              );
+              const outboundCarrierNames = quote.OutboundLeg.CarrierIds.map(
+                (quoteCarrierId) => {
+                  const outboundCarrierFound = this.state.results.Carriers.find(
+                    (outboundCarrier) =>
+                      outboundCarrier.CarrierId === quoteCarrierId
+                  );
+                  const outboundCarrierName = outboundCarrierFound
+                    ? outboundCarrierFound.Name
+                    : '';
+                  return outboundCarrierName;
+                }
+              );
               return (
                 <div key={quote.id} className="results-box">
                   <div className="outbound-trip">
@@ -222,7 +202,7 @@ class Home extends Component {
                       {this.state.results.Places[0].CityName.toUpperCase()}
                     </div>
                     <div className="origin-city">
-                      {this.state.originAirportInputValue}{' '}
+                      {this.state.results.Places[0].Name}{' '}
                       {'(' + this.state.results.Places[0].SkyscannerCode + ')'}
                     </div>
                     <br></br>
@@ -233,68 +213,56 @@ class Home extends Component {
                       {this.state.results.Places[1].CityName.toUpperCase()}
                     </div>
                     <div className="origin-city">
-                      {this.state.destinationAirportInputValue}{' '}
+                      {this.state.results.Places[1].Name}{' '}
                       {'(' + this.state.results.Places[1].SkyscannerCode + ')'}
                     </div>
                   </div>
                   <div className="flight-directions">
                     <div className="flight-carriers">
-                    {this.state.results.Carriers[0].Name.toUpperCase()}
+                      {outboundCarrierNames.join(', ')}{' '}
+                      {quote.Direct === false ? 'Not Direct' : 'Direct'}
                     </div>
                     <div className="airplane-icon">
                       {' '}
-                      - - - - -<i className="fas fa-plane"></i>
-                    </div>
-                    <div className="flight-direct">
-                      {quote.Direct === false ? 'Not Direct' : 'Direct'}
+                      - - - - - - -<i className="fas fa-plane"></i>
                     </div>
                     <div className="flight-carriers">
-                    {this.state.results.Carriers[0].Name.toUpperCase()}
+                      {inboundCarrierNames.join(', ')}{' '}
+                      {quote.Direct === false ? 'Not Direct' : 'Direct'}
                     </div>
                     <div className="airplane-icon">
                       {' '}
-                      - - - - -<i className="fas fa-plane"></i>
-                    </div>
-                    <div className="flight-direct">
-                      {quote.Direct === false ? 'Not Direct' : 'Direct'}
+                      - - - - - - -<i className="fas fa-plane"></i>
                     </div>
                   </div>
                   {/* I need a defensive check to make sure there is an inbound flight available */}
                   <div className="inbound-trip">
-                    {/* <div className="depart-date">{outboundDateFormat}</div> */}
                     <div className="depart-time">
                       {outboundTimeFormat}{' '}
                       {this.state.results.Places[1].CityName.toUpperCase()}
                     </div>
                     <div className="destination-city">
-                      {this.state.destinationAirportInputValue}{' '}
+                      {this.state.results.Places[1].Name}{' '}
                       {'(' + this.state.results.Places[1].SkyscannerCode + ')'}
                     </div>
-                    <br></br>
-                    {/* <div className="land-date">{inboundDateFormat}</div> */}
+                    <span></span>
                     <div className="land-time">
                       {inboundTimeFormat}{' '}
                       {this.state.results.Places[0].CityName.toUpperCase()}
                     </div>
                     <div className="destination-city">
-                      {this.state.originAirportInputValue}{' '}
+                      {this.state.results.Places[0].Name}{' '}
                       {'(' + this.state.results.Places[0].SkyscannerCode + ')'}
                     </div>
                   </div>
                   <div className="flight-price">
-                    {/* need to fix the currency to be accurate */}
                     {this.state.results.Currencies[0].Symbol} {quote.MinPrice}
                     <button className="flight-button">Pick me!</button>
                   </div>
-
-                  {/* these below are not rendering */}
-                  {/* <p>{inboundCarrierNames.join(', ')}</p> */}
-                  {/* <p>{outboundCarrierNames.join(', ')}</p>  */}
                 </div>
               );
             })}
         </div>
-
         <div className="carousels-container">
           <p className="flight-deals-title">Recent Flight Deals For You</p>
           <Link to="/flight-deals">
