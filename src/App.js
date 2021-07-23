@@ -37,7 +37,6 @@ class App extends Component {
 
       this.setState({ currencies: data.Currencies });
     };
-
     fetchCurrencies();
   }
 
