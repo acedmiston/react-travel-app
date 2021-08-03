@@ -117,7 +117,7 @@ li {
 
 .menu-item:hover {
   color: #f9c502;
-  text-shadow: 2px 2px #000000 important!;
+  text-shadow: 2px 2px #000000;
 }
 
 .header__middle__logo {
@@ -173,9 +173,12 @@ li {
   left: 48px;
 }
 
+.currencies{
+  display: none;
+}
+
 .sub__menus {
   position: absolute;
-  display: none;
   background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
   border: 1px solid rgb(11, 11, 22);
   width: 227px;
@@ -183,7 +186,11 @@ li {
   padding: 2px 0 0 0;
   z-index: 1000;
   box-shadow: 0 10px 12px rgb(22 33 39 / 25%);
-  color: #f9c502;
+  color: #f9c502;  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
 }
 
 @media (max-width: 767px) {
@@ -205,11 +212,12 @@ li {
   padding: 7px 0 0px 0;
   margin: 7px 27px;
 }
+
 .menu-item:hover > a {
-  color: #f9c502 !important;
+  color: #f9c502;
 }
 .menu-item .sub__menus li:hover a {
-  color: #f9c502 !important;
+  color: #f9c502;
 }
 
 .header__middle__logo img {
@@ -236,13 +244,13 @@ li {
     margin: 27px 0 0 0;
   }
   .main-nav .menubar__button:hover {
-    background-color: #f44336;
+    background-color: #f9c502;
   }
   .main-nav .menu-item:hover > a {
-    color: #f9c502 !important;
+    color: #f9c502;
   }
   .main-nav .menubar__button {
-    display: block !important;
+    display: block;
     background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
     color: #f9c502;
     padding: 6px 7px;

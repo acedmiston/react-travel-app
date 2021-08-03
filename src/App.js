@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import NotFound from './Pages/NotFound';
 import axios from 'axios';
 import Navbar from './components/Navbar';
+import Login from './Pages/Login';
 
 class App extends Component {
   state = {
@@ -51,7 +52,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("currency test", this.state.currency);
     return (
       <div className="page-container">
         <Router basename="/">
@@ -61,6 +61,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" render={(props) => <Home currency={this.state.currency} currencies={this.state.currencies} selectedLocale={this.state.selectedLocale} />} />
                 {/* <Route exact path="/stories" component={Stories} /> */}
+                <Route path="/login" component={Login} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/flight-deals" component={FlightDeals} />
                 <Route path="/hottest-destinations" component={HottestDestinations} />
