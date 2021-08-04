@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 import '../login.css';
@@ -13,13 +13,15 @@ class Login extends Component {
     this.setState({ addClass: !this.state.addClass });
   };
 
-  onSignupSubmit = async () => {
+  onSignupSubmit = async (e) => {
+    e.preventDefault();
     const results = await axios.post('http://localhost:6002/sign-up', {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      hashedPassword: this.state.hashedPassword,
+      password: this.state.password,
     });
+    console.log(results);
     if (results.data.received === true) {
       //make a thank you message and send back to home page
       swal({
@@ -27,21 +29,28 @@ class Login extends Component {
         text: 'Your adventures await...',
         type: 'success',
       });
+      setTimeout(() => this.props.history.push('/'), 2000);
     }
   };
 
-  onSigninSubmit = async () => {
-    const results = await axios.post('http://localhost:6002/sign-in', {
+  onLoginSubmit = async (e) => {
+    e.preventDefault();
+    const results = await axios.post('http://localhost:6002/log-in', {
       email: this.state.email,
-      hashedPassword: this.state.hashedPassword,
+      password: this.state.password,
     });
-    if (results.data.received === true) {
-      //make a thank you message and send back to home page
+    console.log(results);
+    if (results.data.token) {
+      localStorage.setItem('token', results.data.token);
+      this.props.updateLoggedIn();
       swal({
         title: 'Welcome back!',
         text: 'Your adventures await...',
         type: 'success',
       });
+      setTimeout(() => this.props.history.push('/'), 2000);
+    } else {
+      alert('Your login was incorrect');
     }
   };
 
@@ -52,6 +61,7 @@ class Login extends Component {
 
   render() {
     console.log(this.state);
+
     let container = ['login-container'];
     if (this.state.addClass) {
       container.push('right-panel-active');
@@ -104,7 +114,7 @@ class Login extends Component {
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form action="#">
+          <form action="#" className="signin-form">
             <h1 className="login-h1">Sign in</h1>
             <div className="social-container">
               <Link to="#" className="social login-link">
@@ -130,10 +140,12 @@ class Login extends Component {
               className="login-input"
               name="password"
             />
-            <Link to="#" className="login-link">
-              Forgot your password?
-            </Link>
-            <button className="login-button" onClick={this.onSigninSubmit}>
+            <div className="forget-password">
+              <Link to="#" className="login-link">
+                Forgot your password?
+              </Link>
+            </div>
+            <button className="login-button" onClick={this.onLoginSubmit}>
               Sign In
             </button>
           </form>
@@ -141,32 +153,24 @@ class Login extends Component {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1 className="login-h1">Welcome Back, Nomader!</h1>
+              <h1 className="login-h1">Welcome, Nomader!</h1>
               <p className="login-p">
                 To keep connected with us sign in,
                 <br></br>
                 or create and account with your info on the right!
               </p>
-              <button
-                className="ghost login-button"
-                id="signIn"
-                onClick={this.toggle}
-              >
+              <button className="ghost login-button" onClick={this.toggle}>
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1 className="login-h1">Hello, Nomader!</h1>
+              <h1 className="login-h1">Hey, Nomader!</h1>
               <p className="login-p">
                 Sign in to the left or
                 <br></br>
                 Sign up and start exploring with us today!
               </p>
-              <button
-                className="ghost login-button"
-                id="signUp"
-                onClick={this.toggle}
-              >
+              <button className="ghost login-button" onClick={this.toggle}>
                 Sign Up
               </button>
             </div>
@@ -177,4 +181,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

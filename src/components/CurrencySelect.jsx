@@ -13,14 +13,12 @@ class CurrencySelect extends Component {
           {this.props.currencies &&
             this.props.currencies.map((currency) => {
               return (
-                // <li key={this.props.name}>
-                <li>
+                <li key={currency.Code}>
                   {/* html entity needed for currency symbol so all comps can see it */}
                   <p
-                    className="nav-links"
+                    className="currency"
                     onClick={() => {
                       this.props.currencySelect(currency.Code);
-                      console.log(currency);
                     }}
                   >
                     {currency.Symbol} {currency.Code}

@@ -6,7 +6,7 @@ import GoldenGate from '../images/goldengate.jpg';
 import India from '../images/india.jpg';
 import Scotland from '../images/scotland.jpg';
 import Paris from '../images/Paris.jpg';
-import GreatBarrierReef from '../images/greatBarrierReef.JPG';
+import GreatBarrierReef from '../images/greatBarrierReef.jpg';
 import GreatWall from '../images/greatwall.jpg';
 import LA from '../images/LA.jpg';
 import Kyoto from '../images/kyoto.jpg';

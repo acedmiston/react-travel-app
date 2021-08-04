@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import CurrencySelect from './CurrencySelect';
 import { FiAlignRight, FiXCircle, FiChevronDown } from 'react-icons/fi';
 import '../navbar.css';
@@ -56,7 +56,7 @@ class Navbar extends Component {
             <div className="header__middle__menus">
               <nav className="main-nav ">
                 {/* Responsive Menu Button */}
-                {isResponsiveclose === true ? (
+                {isResponsiveclose ? (
                   <>
                     <span
                       className="menubar__button"
@@ -106,19 +106,17 @@ class Navbar extends Component {
                     className="menu-item sub__menus__arrows"
                   >
                     {' '}
-                    <Link to="#">
+                    <NavLink to="#">
                       {' '}
                       <p className="display-currency">{this.props.currency}</p>
                       <FiChevronDown />{' '}
-                    </Link>
-                    <div className="currencies">
+                    </NavLink>
+                    <div>
                       <ul className={boxClassSubMenu.join(' ')}>
                         {this.props.currencies &&
                           this.props.currencies.map((currency) => {
                             return (
-                              // <li key={this.props.name}>
-  
-                              <li>
+                              <li key={currency.Code}>
                                 {/* html entity needed for currency symbol so all comps can see it */}
                                 <p
                                   className="currency"
@@ -140,9 +138,8 @@ class Navbar extends Component {
                       activeClassName="is-active"
                       to={`/Contact`}
                     >
-                      {' '}
-                      Contact{' '}
-                    </NavLink>{' '}
+                      Contact
+                    </NavLink>
                   </li>
                   <li className="menu-item">
                     <NavLink
@@ -151,10 +148,35 @@ class Navbar extends Component {
                       onClick={toggleClass}
                       to={`/`}
                     >
-                      {' '}
-                      Home{' '}
+                      Home
                     </NavLink>
                   </li>
+                  {this.props.isLoggedIn ? (
+                    //Log-out : clear local local storage and set loggedin to be false
+                    <li className="menu-item">
+                      <NavLink
+                        onClick={() => {
+                          localStorage.clear();
+                          this.props.updateLoggedIn();
+                          
+                        }}
+                        to={`/`}
+                      >
+                        Log out
+                      </NavLink>
+                    </li>
+                  ) : (
+                    <li className="menu-item">
+                      <NavLink
+                        activeClassName="is-active"
+                        onClick={toggleClass}
+                        to={`/login`}
+                      >
+                        {' '}
+                        Login/Signup{' '}
+                      </NavLink>
+                    </li>
+                  )}
                 </ul>
               </nav>
             </div>

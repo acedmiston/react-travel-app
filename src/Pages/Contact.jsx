@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Button } from 'antd';
 import axios from 'axios';
 import swal from 'sweetalert';
-// import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 const { TextArea } = Input;
 
 class Contact extends Component {
@@ -25,6 +25,8 @@ class Contact extends Component {
         text: 'We will get back to you shortly',
         type: 'success',
       });
+
+      setTimeout(() => this.props.history.push('/'), 2000);
     }
   };
 
@@ -109,4 +111,4 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+export default withRouter(Contact);

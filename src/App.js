@@ -20,9 +20,14 @@ class App extends Component {
   state = {
     currency: 'GBP',
     currencies: '',
+    isLoggedIn: false,
   }
 
   componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.setState({ isLoggedIn: true })
+    }
     const options = {
       headers: {
         "x-rapidapi-key": "3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c",
@@ -46,22 +51,22 @@ class App extends Component {
     if (currency !== '') this.setState({ currency });
   }
 
-  // set selected state for nav
-  setSelectedLocale = (selectedLocale) => {
-    this.setState({ selectedLocale });
+  //updates the state when 
+  updateLoggedIn = () => {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn })
   }
 
   render() {
     return (
       <div className="page-container">
         <Router basename="/">
-          <Navbar currencySelect={this.currencySelect} currency={this.state.currency} currencies={this.state.currencies} locales={this.state.locales} selectedLocale={this.state.selectedLocale} setSelectedLocale={this.setSelectedLocale} />
+          <Navbar currencySelect={this.currencySelect} currency={this.state.currency} currencies={this.state.currencies} isLoggedIn={this.state.isLoggedIn} updateLoggedIn={this.updateLoggedIn} />
           <main>
             <div className="pages">
               <Switch>
-                <Route exact path="/" render={(props) => <Home currency={this.state.currency} currencies={this.state.currencies} selectedLocale={this.state.selectedLocale} />} />
+                <Route path="/login" render={(props) => <Login component={Login} updateLoggedIn={this.updateLoggedIn} />} />
+                <Route exact path="/" render={(props) => <Home currency={this.state.currency} currencies={this.state.currencies} />} />
                 {/* <Route exact path="/stories" component={Stories} /> */}
-                <Route path="/login" component={Login} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/flight-deals" component={FlightDeals} />
                 <Route path="/hottest-destinations" component={HottestDestinations} />

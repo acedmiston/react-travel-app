@@ -74,6 +74,19 @@ body {
   width: 400px;
 }
 
+.signin-form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 20px;
+  height: 100%;
+  text-align: center;
+  width: 400px;
+  top: -10px;
+}
+
 .login-input {
   background-color: #eee;
   border: none;
@@ -110,11 +123,12 @@ body {
 }
 
 .login-container.right-panel-active .sign-in-container {
-  transform: translateX(100%);
+  transform: translateX(200%);
 }
 
 .sign-up-container {
-  left: 0;
+  left: -30px;
+  top: -25px;
   width: 50%;
   opacity: 0;
   z-index: 1;
@@ -220,4 +234,8 @@ body {
   margin: 0 5px;
   height: 40px;
   width: 40px;
+}
+
+.forget-password {
+  padding: 5px 0 15px;
 }

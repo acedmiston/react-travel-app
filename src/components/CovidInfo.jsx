@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import covidMap from '../images/covidmap.png';
-// import { Link } from 'react-router-dom';
 
 class CovidInfo extends Component {
   render() {
@@ -82,7 +81,6 @@ class CovidInfo extends Component {
                 Order a PCR Test
               </a>
             </button>
-            {/* </Link> */}
           </div>
         </div>
       </>
