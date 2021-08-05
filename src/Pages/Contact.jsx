@@ -6,10 +6,6 @@ import { withRouter } from 'react-router-dom';
 const { TextArea } = Input;
 
 class Contact extends Component {
-  // componentDidMount() {
-  //   swal("Oops!", "Something went wrong!", "error");
-  // }
-
   onSubmit = async () => {
     const results = await axios.post('http://localhost:6002/contact', {
       fullname: this.state.fullname,
@@ -19,7 +15,6 @@ class Contact extends Component {
       message: this.state.message,
     });
     if (results.data.received === true) {
-      //make a thank you message and send back to home page
       swal({
         title: 'Your message was sent!',
         text: 'We will get back to you shortly',
@@ -45,11 +40,7 @@ class Contact extends Component {
             <h2>Get in Touch</h2>
             <p>Send us a message below: </p>
           </div>
-          <Form
-            // name="normal_login"
-            className="login-form"
-            initialValues={{ remember: true }}
-          >
+          <Form className="login-form" initialValues={{ remember: true }}>
             <Form.Item
               id="fullname"
               className="input-field"

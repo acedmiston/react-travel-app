@@ -4,7 +4,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-// import Nav from './components/Nav';
 import FlightDeals from './Pages/FlightDeals';
 import Home from './Pages/Home';
 import Contact from './Pages/Contact';
@@ -51,7 +50,7 @@ class App extends Component {
     if (currency !== '') this.setState({ currency });
   }
 
-  //updates the state when 
+  //updates the state when you login/out
   updateLoggedIn = () => {
     this.setState({ isLoggedIn: !this.state.isLoggedIn })
   }
@@ -66,7 +65,7 @@ class App extends Component {
               <Switch>
                 <Route path="/login" render={(props) => <Login component={Login} updateLoggedIn={this.updateLoggedIn} />} />
                 <Route exact path="/" render={(props) => <Home currency={this.state.currency} currencies={this.state.currencies} />} />
-                {/* <Route exact path="/stories" component={Stories} /> */}
+                {/* <Route path="/stories" component={Stories} /> */}
                 <Route path="/contact" component={Contact} />
                 <Route path="/flight-deals" component={FlightDeals} />
                 <Route path="/hottest-destinations" component={HottestDestinations} />

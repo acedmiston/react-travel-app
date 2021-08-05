@@ -3,7 +3,7 @@ import axios from 'axios';
 import FlightInput from '../components/FlightInput';
 import CovidInfo from '../components/CovidInfo';
 import ImageCarousel from '../components/ImageCarousel';
-// import Results from '../components/Results';
+import Results from '../components/Results';
 import { Link } from 'react-router-dom';
 import love from '../images/Love.jpg';
 
@@ -46,7 +46,7 @@ class Home extends Component {
           <div className="outer-box">
             <div className="radio-container">
               <div className="radio">
-                <label className="radio-label">
+                <label htmlFor="radio" className="radio-label">
                   <input
                     type="radio"
                     name="flightDirection"
@@ -60,7 +60,7 @@ class Home extends Component {
                 </label>
               </div>
               <div className="radio">
-                <label className="radio-label">
+                <label htmlFor="radio" className="radio-label">
                   <input
                     type="radio"
                     name="flightDirection"
@@ -76,7 +76,7 @@ class Home extends Component {
             </div>
             <div className="input-fields">
               <div>
-                <label>Origin</label>
+                <label htmlFor="originAirport">Origin</label>
                 <FlightInput
                   type={'originAirport'}
                   showDropDown={
@@ -90,7 +90,7 @@ class Home extends Component {
                 />
               </div>
               <div>
-                <label>Destination</label>
+                <label htmlFor="destinationAirport">Destination</label>
                 <FlightInput
                   type={'destinationAirport'}
                   showDropDown={
@@ -104,9 +104,10 @@ class Home extends Component {
                 />
               </div>
               <div>
-                <label>Depart</label>
+                <label htmlFor="depart">Depart</label>
                 <div>
                   <input
+                    id="depart"
                     type="date"
                     name="outBoundDate"
                     onChange={this.onChange}
@@ -114,9 +115,10 @@ class Home extends Component {
                 </div>
               </div>
               <div>
-                <label>Return</label>
+                <label htmlFor="return">Return</label>
                 <div>
                   <input
+                    id="return"
                     type="date"
                     name="inBoundDate"
                     onChange={this.onChange}
@@ -125,9 +127,10 @@ class Home extends Component {
                 </div>
               </div>
               <div>
-                <label># Nomaders</label>
+                <label htmlFor="numbers"># Nomaders</label>
                 <div>
                   <input
+                    id="numbers"
                     className="number-input"
                     name="numberNomaders"
                     type="number"
@@ -146,145 +149,7 @@ class Home extends Component {
             </div>
           </div>
         </form>
-        <div className="display-results">
-          {this.state.results &&
-            this.state.results.Quotes.map((quote) => {
-              let inboundDateFormat, inboundTimeFormat;
-              let inboundCarrierNames = [];
-              let isReturn = false;
-              if (this.state.flightDirection === 'return') {
-                isReturn = true;
-                inboundDateFormat = new Date(
-                  quote.InboundLeg.DepartureDate
-                ).toDateString();
-                inboundTimeFormat = new Date(
-                  quote.InboundLeg.DepartureDate
-                ).toLocaleTimeString(navigator.language, {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                });
-                inboundCarrierNames = quote.InboundLeg.CarrierIds.map(
-                  (quoteCarrierId) => {
-                    const inboundCarrierFound =
-                      this.state.results.Carriers.find(
-                        (inboundCarrier) =>
-                          inboundCarrier.CarrierId === quoteCarrierId
-                      );
-                    const inboundCarrierName = inboundCarrierFound
-                      ? inboundCarrierFound.Name
-                      : '';
-                    return inboundCarrierName;
-                  }
-                );
-              }
-              const outboundDateFormat = new Date(
-                quote.OutboundLeg.DepartureDate
-              ).toDateString();
-              const outboundTimeFormat = new Date(
-                quote.OutboundLeg.DepartureDate
-              ).toLocaleTimeString(navigator.language, {
-                hour: '2-digit',
-                minute: '2-digit',
-              });
-              console.log(quote);
-              const outboundCarrierNames = quote.OutboundLeg.CarrierIds.map(
-                (quoteCarrierId) => {
-                  const outboundCarrierFound = this.state.results.Carriers.find(
-                    (outboundCarrier) =>
-                      outboundCarrier.CarrierId === quoteCarrierId
-                  );
-                  const outboundCarrierName = outboundCarrierFound
-                    ? outboundCarrierFound.Name
-                    : '';
-                  return outboundCarrierName;
-                }
-              );
-              return (
-                <div key={quote.id} className="results-box">
-                  <div className="outbound-trip">
-                    <p>Depart:</p>
-                    <div className="depart-date">{outboundDateFormat}</div>
-                    <div className="depart-time">
-                      {outboundTimeFormat}{' '}
-                      {this.state.results.Places[0].CityName.toUpperCase()}
-                    </div>
-                    <div className="origin-city">
-                      {this.state.results.Places[0].Name}{' '}
-                      {'(' + this.state.results.Places[0].SkyscannerCode + ')'}
-                    </div>
-                    <br></br>
-                    {isReturn && (
-                      <>
-                        <p>Return:</p>
-                        <div className="land-date">{inboundDateFormat}</div>
-                        <div className="land-time">
-                          {inboundTimeFormat}{' '}
-                          {this.state.results.Places[1].CityName.toUpperCase()}
-                        </div>
-                        <div className="origin-city">
-                          {this.state.results.Places[1].Name}{' '}
-                          {'(' +
-                            this.state.results.Places[1].SkyscannerCode +
-                            ')'}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <div className="flight-directions">
-                    <div className="flight-carriers">
-                      {outboundCarrierNames.join(', ')}{' '}
-                      {quote.Direct === false ? 'Not Direct' : 'Direct'}
-                    </div>
-                    <div className="airplane-icon">
-                      {' '}
-                      - - - - - - -<i className="fas fa-plane"></i>
-                    </div>
-                    {isReturn && (
-                      <>
-                        <div className="flight-carriers">
-                          {inboundCarrierNames.join(', ')}{' '}
-                          {quote.Direct === false ? 'Not Direct' : 'Direct'}
-                        </div>
-                        <div className="airplane-icon">
-                          {' '}
-                          - - - - - - -<i className="fas fa-plane"></i>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <div className="inbound-trip">
-                    <div className="depart-time">
-                      {outboundTimeFormat}{' '}
-                      {this.state.results.Places[1].CityName.toUpperCase()}
-                    </div>
-                    <div className="destination-city">
-                      {this.state.results.Places[1].Name}{' '}
-                      {'(' + this.state.results.Places[1].SkyscannerCode + ')'}
-                    </div>
-                    <span></span>
-                    {isReturn && (
-                      <>
-                        <div className="land-time">
-                          {inboundTimeFormat}{' '}
-                          {this.state.results.Places[0].CityName.toUpperCase()}
-                        </div>
-                        <div className="destination-city">
-                          {this.state.results.Places[0].Name}{' '}
-                          {'(' +
-                            this.state.results.Places[0].SkyscannerCode +
-                            ')'}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <div className="flight-price">
-                    {this.state.results.Currencies[0].Symbol} {quote.MinPrice}
-                    <button className="flight-button">Pick me!</button>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
+        <Results results={this.state.results} />
         <div className="carousels-container">
           <p className="flight-deals-title">Recent Flight Deals For You</p>
           <Link to="/flight-deals">
@@ -302,6 +167,7 @@ class Home extends Component {
     );
   }
 
+  //not currently in use
   randomTime = () => {
     const randomHour = Math.floor(Math.random() * 13) + 1;
     const randomMin = Math.floor(Math.random() * 60);
@@ -338,27 +204,22 @@ class Home extends Component {
 
   onAirportSelect = (place, type) => {
     // setting object with dynamic key based on a variable
-    // console.log(type);
     this.setState({
       [type + 'Selection']: place,
       [type]: { Places: [] },
       [type + 'InputValue']: place.PlaceName,
     });
-    // console.log(place, type);
   };
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      // console.log(this.state);
-    });
+    this.setState({ [e.target.name]: e.target.value }, () => {});
   };
 
   onInput = (e) => {
-    // console.log(e.target.id, e.target.value);
     this.setState({ [e.target.id + 'InputValue']: e.target.value });
     const options = {
       method: 'GET',
-      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/${this.props.currency}/en-GB/`,
+      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/GB/${this.props.currency}/en-GB/`,
       params: { query: e.target.value },
       headers: {
         'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
@@ -372,7 +233,6 @@ class Home extends Component {
   async getAPIData(id, options) {
     const result = await axios.request(options);
     this.setState({ [id]: result.data });
-    // console.log(this.state);
   }
 }
 

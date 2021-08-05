@@ -22,14 +22,19 @@ class Login extends Component {
       password: this.state.password,
     });
     console.log(results);
-    if (results.data.received === true) {
-      //make a thank you message and send back to home page
+    if (results.data.received) {
       swal({
         title: 'Thanks for joining us!',
         text: 'Your adventures await...',
-        type: 'success',
+        icon: 'success',
       });
       setTimeout(() => this.props.history.push('/'), 2000);
+    } else {
+      swal({
+        title: 'Oh no!',
+        text: 'Your email address is already in the system.',
+        icon: 'error',
+      });
     }
   };
 
@@ -46,11 +51,15 @@ class Login extends Component {
       swal({
         title: 'Welcome back!',
         text: 'Your adventures await...',
-        type: 'success',
+        icon: 'success',
       });
       setTimeout(() => this.props.history.push('/'), 2000);
     } else {
-      alert('Your login was incorrect');
+      swal({
+        title: 'Try again!',
+        text: 'Your sign in info was incorrect.',
+        icon: 'error',
+      });
     }
   };
 
@@ -60,8 +69,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     let container = ['login-container'];
     if (this.state.addClass) {
       container.push('right-panel-active');

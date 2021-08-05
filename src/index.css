@@ -364,10 +364,11 @@ label {
 .covid-map-box {
   margin: 50px auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   max-width: 1200px;
   background-color: rgba(190, 190, 190, 0.816);
-  border-radius: 70px;
+  border-radius: 30px;
 }
 
 .covid-map-info {
@@ -409,9 +410,16 @@ label {
   color: rgb(255, 255, 255);
 }
 
+.covid-map-holder {
+  display: flex;
+  justify-content: space-around;
+}
+
 .covid-map {
-  width: 60%;
+  width: 90%;
   height: auto;
+  padding: 10px 0 20px;
+  border-radius: 10px;
 }
 
 /* footer */
@@ -448,46 +456,6 @@ footer {
 }
 
 @media screen and (max-width: 960px) {
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    border-top: 1px solid #fff;
-    position: absolute;
-    top: 68px;
-    left: -110%;
-    opacity: 1;
-    transition: all 0.5s ease;
-  }
-
-  .nav-menu.active {
-    background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
-    left: 0px;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
-  }
-  .nav-item .active {
-    color: #ffdd40;
-    border: none;
-  }
-  .nav-links {
-    padding: 1.5rem;
-    width: 100%;
-    display: table;
-  }
-
-  .nav-icon {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: #ffdd40;
-  }
-
   .results-button {
     width: 300px;
   }

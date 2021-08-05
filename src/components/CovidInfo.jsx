@@ -13,7 +13,6 @@ class CovidInfo extends Component {
               latest info for world travellers. And sign up to get updates when
               things change.
             </p>
-
             <button className="map-button">
               <a
                 target="_blank"
@@ -24,7 +23,9 @@ class CovidInfo extends Component {
               </a>
             </button>
           </div>
-          <img src={covidMap} alt="covid map" className="covid-map" />
+          <div className="covid-map-holder">
+            <img src={covidMap} alt="covid map" className="covid-map" />
+          </div>
         </div>
         <div className="covid-boxes">
           <div className="covid-box">
