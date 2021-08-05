@@ -37,7 +37,12 @@ class Home extends Component {
     return (
       <>
         <div className="background-box">
-          <img src={love} alt="background" className="background" />
+          <img
+            src={love}
+            alt="background"
+            className="background"
+            rel="preload"
+          />
         </div>
         <div className="tagline-holder">
           <p className="home-tagline">Where will you go next?</p>
