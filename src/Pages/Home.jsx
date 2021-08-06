@@ -333,9 +333,12 @@ class Home extends Component {
   //shows all results from the flight search
   onSubmit = async (e) => {
     e.preventDefault();
-    const results = await axios.post('http://localhost:6002/submit', {
-      payload: `GB/${this.props.currency}/en-GB/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`,
-    });
+    const results = await axios.post(
+      'https://nomader-backend.herokuapp.com/submit',
+      {
+        payload: `GB/${this.props.currency}/en-GB/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`,
+      }
+    );
     this.setState({ results: results.data });
   };
 
@@ -357,10 +360,13 @@ class Home extends Component {
   onInput = async (e) => {
     this.setState({ [e.target.id + 'InputValue']: e.target.value });
 
-    const results = await axios.post('http://localhost:6002/flight-input', {
-      payload: `GB/${this.props.currency}/en-GB/`,
-      params: { query: e.target.value },
-    });
+    const results = await axios.post(
+      'https://nomader-backend.herokuapp.com/flight-input',
+      {
+        payload: `GB/${this.props.currency}/en-GB/`,
+        params: { query: e.target.value },
+      }
+    );
     console.log(results);
     this.setState({ [e.target.id]: results.data });
   };

@@ -7,7 +7,7 @@ const { TextArea } = Input;
 
 class Contact extends Component {
   onSubmit = async () => {
-    const results = await axios.post('http://localhost:6002/contact', {
+    const results = await axios.post('https://nomader-backend.herokuapp.com/contact', {
       fullname: this.state.fullname,
       email: this.state.email,
       phone: this.state.phone,
