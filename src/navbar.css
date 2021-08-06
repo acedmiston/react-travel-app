@@ -161,19 +161,30 @@
   stroke-width: 4;
 }
 
+@media (max-width: 550px) {
+  .background {
+    display: none;
+  }
+}
+
 @media (max-width: 880px) {
   .toggle-button {
     display: flex;
   }
 
   .nav-items {
-    display: none;
+    display: block;
     width: 100%;
+  }
+  
+  .nav-items:first-child{
+    display: none;
   }
 
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    overflow: hidden;
   }
 
   .nav-items ul {

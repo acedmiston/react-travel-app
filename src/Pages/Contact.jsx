@@ -18,7 +18,7 @@ class Contact extends Component {
       swal({
         title: 'Your message was sent!',
         text: 'We will get back to you shortly',
-        type: 'success',
+        icon: 'success',
       });
 
       setTimeout(() => this.props.history.push('/'), 2000);

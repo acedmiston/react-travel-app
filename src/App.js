@@ -22,27 +22,13 @@ class App extends Component {
     isLoggedIn: false,
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const token = localStorage.getItem('token');
     if (token) {
       this.setState({ isLoggedIn: true })
     }
-    const options = {
-      headers: {
-        "x-rapidapi-key": "3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c",
-        "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-      },
-    };
-
-    // Get the currencies from the API 
-    const fetchCurrencies = async () => {
-      const { data } = await axios.get(
-        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/currencies", options
-      );
-
-      this.setState({ currencies: data.Currencies });
-    };
-    fetchCurrencies();
+    const results = await axios.get('http://localhost:6002/currencies');
+    this.setState({ currencies: results.data.currencies })
   }
 
   //set selected currency for nav

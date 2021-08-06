@@ -3,7 +3,7 @@ import axios from 'axios';
 import FlightInput from '../components/FlightInput';
 import CovidInfo from '../components/CovidInfo';
 import ImageCarousel from '../components/ImageCarousel';
-import Results from '../components/Results';
+// import Results from '../components/Results';
 import { Link } from 'react-router-dom';
 import love from '../images/Love.jpg';
 
@@ -23,14 +23,12 @@ class Home extends Component {
   render() {
     const {
       outBoundDate,
-      // inBoundDate,
       numberNomaders,
       originAirportInputValue,
       destinationAirportInputValue,
     } = this.state;
     const isEnabled =
       outBoundDate.length > 0 &&
-      // inBoundDate && inBoundDate.length > 0 &&
       numberNomaders.length > 0 &&
       originAirportInputValue.length > 0 &&
       destinationAirportInputValue.length > 0;
@@ -154,7 +152,155 @@ class Home extends Component {
             </div>
           </div>
         </form>
-        <Results results={this.state.results} />
+        {/* <Results results={this.state.results} /> */}
+        <div className="display-results">
+          {this.state.results &&
+            this.state.results.Quotes.map((quote) => {
+              let inboundDateFormat, inboundTimeFormat;
+              let inboundCarrierNames = [];
+              let isReturn = false;
+
+              if (this.state.flightDirection === 'return') {
+                isReturn = true;
+
+                inboundDateFormat = new Date(
+                  quote.InboundLeg.DepartureDate
+                ).toDateString();
+
+                inboundTimeFormat = new Date(
+                  quote.InboundLeg.DepartureDate
+                ).toLocaleTimeString(navigator.language, {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                });
+
+                inboundCarrierNames = quote.InboundLeg.CarrierIds.map(
+                  (quoteCarrierId) => {
+                    const inboundCarrierFound =
+                      this.state.results.Carriers.find(
+                        (inboundCarrier) =>
+                          inboundCarrier.CarrierId === quoteCarrierId
+                      );
+                    const inboundCarrierName = inboundCarrierFound
+                      ? inboundCarrierFound.Name
+                      : '';
+                    return inboundCarrierName;
+                  }
+                );
+              }
+
+              const outboundDateFormat = new Date(
+                quote.OutboundLeg.DepartureDate
+              ).toDateString();
+
+              const outboundTimeFormat = new Date(
+                quote.OutboundLeg.DepartureDate
+              ).toLocaleTimeString(navigator.language, {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
+
+              console.log(quote);
+
+              const outboundCarrierNames = quote.OutboundLeg.CarrierIds.map(
+                (quoteCarrierId) => {
+                  const outboundCarrierFound = this.state.results.Carriers.find(
+                    (outboundCarrier) =>
+                      outboundCarrier.CarrierId === quoteCarrierId
+                  );
+                  const outboundCarrierName = outboundCarrierFound
+                    ? outboundCarrierFound.Name
+                    : '';
+                  return outboundCarrierName;
+                }
+              );
+
+              return (
+                <div key={quote.id} className="results-box">
+                  <div className="outbound-trip">
+                    <p>Depart:</p>
+                    <div className="depart-date">{outboundDateFormat}</div>
+                    <div className="depart-time">
+                      {outboundTimeFormat}{' '}
+                      {this.state.results.Places[0].CityName.toUpperCase()}
+                    </div>
+                    <div className="origin-city">
+                      {this.state.results.Places[0].Name}{' '}
+                      {'(' + this.state.results.Places[0].SkyscannerCode + ')'}
+                    </div>
+                    <br></br>
+                    {isReturn && (
+                      <>
+                        <p>Return:</p>
+                        <div className="land-date">{inboundDateFormat}</div>
+                        <div className="land-time">
+                          {inboundTimeFormat}{' '}
+                          {this.state.results.Places[1].CityName.toUpperCase()}
+                        </div>
+                        <div className="origin-city">
+                          {this.state.results.Places[1].Name}{' '}
+                          {'(' +
+                            this.state.results.Places[1].SkyscannerCode +
+                            ')'}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="flight-directions">
+                    <div className="flight-carriers">
+                      {outboundCarrierNames.join(', ')}{' '}
+                      {quote.Direct === false ? 'Not Direct' : 'Direct'}
+                    </div>
+                    <div className="airplane-icon">
+                      {' '}
+                      - - - - - - -<i className="fas fa-plane"></i>
+                    </div>
+                    {isReturn && (
+                      <>
+                        <div className="flight-carriers">
+                          {inboundCarrierNames.join(', ')}{' '}
+                          {quote.Direct === false ? 'Not Direct' : 'Direct'}
+                        </div>
+                        <div className="airplane-icon">
+                          {' '}
+                          - - - - - - -<i className="fas fa-plane"></i>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="inbound-trip">
+                    <div className="depart-time">
+                      {outboundTimeFormat}{' '}
+                      {this.state.results.Places[1].CityName.toUpperCase()}
+                    </div>
+                    <div className="destination-city">
+                      {this.state.results.Places[1].Name}{' '}
+                      {'(' + this.state.results.Places[1].SkyscannerCode + ')'}
+                    </div>
+                    <span></span>
+                    {isReturn && (
+                      <>
+                        <div className="land-time">
+                          {inboundTimeFormat}{' '}
+                          {this.state.results.Places[0].CityName.toUpperCase()}
+                        </div>
+                        <div className="destination-city">
+                          {this.state.results.Places[0].Name}{' '}
+                          {'(' +
+                            this.state.results.Places[0].SkyscannerCode +
+                            ')'}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="flight-price">
+                    {this.state.results.Currencies[0].Symbol} {quote.MinPrice}
+                    <button className="flight-button">Pick me!</button>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
         <div className="carousels-container">
           <p className="flight-deals-title">Recent Flight Deals For You</p>
           <Link to="/flight-deals">
@@ -179,36 +325,22 @@ class Home extends Component {
     return randomHour + ':' + randomMin;
   };
 
+  //allows you to clear the state if your airport was incorrect
   onClear = (type) => {
     this.setState({ [type + 'InputValue']: '' });
   };
 
-  onSubmit = (e) => {
+  //shows all results from the flight search
+  onSubmit = async (e) => {
     e.preventDefault();
-    let url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/GB/${this.props.currency}/en-GB/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`;
-    const options = {
-      method: 'GET',
-      url,
-      headers: {
-        'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
-        'x-rapidapi-host':
-          'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
-      },
-    };
-    const self = this;
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        self.setState({ results: response.data });
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    const results = await axios.post('http://localhost:6002/submit', {
+      payload: `GB/${this.props.currency}/en-GB/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`,
+    });
+    this.setState({ results: results.data });
   };
 
+  //sets the state with some dynamic inputs based on a variable
   onAirportSelect = (place, type) => {
-    // setting object with dynamic key based on a variable
     this.setState({
       [type + 'Selection']: place,
       [type]: { Places: [] },
@@ -216,29 +348,22 @@ class Home extends Component {
     });
   };
 
+  //sets the state with some dynamic inputs
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value }, () => {});
   };
 
-  onInput = (e) => {
+  // shows a dropdown of all airports when typing
+  onInput = async (e) => {
     this.setState({ [e.target.id + 'InputValue']: e.target.value });
-    const options = {
-      method: 'GET',
-      url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/GB/${this.props.currency}/en-GB/`,
-      params: { query: e.target.value },
-      headers: {
-        'x-rapidapi-key': '3737c740damsh294914373cea252p10fc24jsnd39fd87ca55c',
-        'x-rapidapi-host':
-          'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
-      },
-    };
-    this.getAPIData(e.target.id, options);
-  };
 
-  async getAPIData(id, options) {
-    const result = await axios.request(options);
-    this.setState({ [id]: result.data });
-  }
+    const results = await axios.post('http://localhost:6002/flight-input', {
+      payload: `GB/${this.props.currency}/en-GB/`,
+      params: { query: e.target.value },
+    });
+    console.log(results);
+    this.setState({ [e.target.id]: results.data });
+  };
 }
 
 export default Home;

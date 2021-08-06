@@ -25,14 +25,14 @@ class Login extends Component {
     if (results.data.received) {
       swal({
         title: 'Thanks for joining us!',
-        text: 'Your adventures await...',
+        text: 'We just set you a verification email, so please verify so we can start our adventures together.',
         icon: 'success',
       });
       setTimeout(() => this.props.history.push('/'), 2000);
     } else {
       swal({
         title: 'Oh no!',
-        text: 'Your email address is already in the system.',
+        text: 'Your email address is already in the system. Please enter a new email.',
         icon: 'error',
       });
     }

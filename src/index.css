@@ -464,6 +464,10 @@ footer {
     width: 300px;
   }
 
+  .map-button {
+    width: 300px;
+  }
+
   .login-form-button {
     margin: 5px auto;
   }
