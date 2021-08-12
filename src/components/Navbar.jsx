@@ -15,7 +15,7 @@ class Nav3 extends Component {
 
   render() {
     let activeNav = ['nav-items'];
-    if (this.state.showNav) {
+    if (!this.state.showNav) {
       activeNav.push('active');
     }
 
@@ -46,6 +46,7 @@ class Nav3 extends Component {
             </li>
             <li className="nav-item">
               <NavLink to={`#`} className="currency">
+                {/* how to add symbol */}
                 {this.props.currency}
                 <FiChevronDown className="chevron" />
               </NavLink>

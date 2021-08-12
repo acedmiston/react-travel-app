@@ -23,6 +23,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.state);
     const token = localStorage.getItem('token');
     if (token) {
       this.setState({ isLoggedIn: true })
@@ -42,6 +43,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="page-container">
         <Router basename="/">

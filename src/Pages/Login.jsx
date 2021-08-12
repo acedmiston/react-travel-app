@@ -15,12 +15,15 @@ class Login extends Component {
 
   onSignupSubmit = async (e) => {
     e.preventDefault();
-    const results = await axios.post('https://nomader-backend.herokuapp.com/sign-up', {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-    });
+    const results = await axios.post(
+      'https://nomader-backend.herokuapp.com/sign-up',
+      {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+      }
+    );
     console.log(results);
     if (results.data.received) {
       swal({
@@ -40,10 +43,13 @@ class Login extends Component {
 
   onLoginSubmit = async (e) => {
     e.preventDefault();
-    const results = await axios.post('https://nomader-backend.herokuapp.com/log-in', {
-      email: this.state.email,
-      password: this.state.password,
-    });
+    const results = await axios.post(
+      'https://nomader-backend.herokuapp.com/log-in',
+      {
+        email: this.state.email,
+        password: this.state.password,
+      }
+    );
     console.log(results);
     if (results.data.token) {
       localStorage.setItem('token', results.data.token);

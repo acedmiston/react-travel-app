@@ -95,7 +95,7 @@
   display: none;
 }
 
-@media all and (max-width: 880px) {
+@media all and (max-width: 1150px) {
   .navbar {
     background: linear-gradient(rgba(8, 8, 8, 0.88), rgba(8, 8, 8, 0.914));
   }
@@ -167,7 +167,7 @@
   }
 }
 
-@media (max-width: 880px) {
+@media (max-width: 1150px) {
   .toggle-button {
     display: flex;
   }
@@ -175,9 +175,13 @@
   .nav-items {
     display: block;
     width: 100%;
-  }
-  
-  .nav-items:first-child{
+  } 
+/*
+  .nav-items {
+    display: none;
+  } */
+
+  .nav-items:first-child {
     display: none;
   }
 

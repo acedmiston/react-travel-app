@@ -69,7 +69,9 @@ class ImageCarousel extends Component {
               <div key={item.id} className="carousel-container">
                 <div className="carousel">
                   <p className="carousel-titles">
-                    {item.text} £{Math.floor(Math.random() * 1000)}
+                    {item.text}{' '}
+                     {/* {this.props.currencies[0].Symbol} */}
+                     £{Math.floor(Math.random() * 1000)}
                   </p>
                   <img src={item.src} alt={item.alt} className="carousel-img" />
                 </div>
