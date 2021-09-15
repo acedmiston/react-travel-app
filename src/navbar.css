@@ -5,11 +5,6 @@
   justify-content: space-between;
 }
 
-/* .nav-holder {
-  display: flex;
-  justify-content: flex-end;
-} */
-
 .nav-items {
   display: flex;
   flex-wrap: wrap;
@@ -104,7 +99,7 @@
     margin-right: 0px;
     display: flex;
     flex-wrap: wrap;
-    overflow: scroll;
+    overflow: hidden;
   }
   .navbar .logo {
     padding-left: 30px;
@@ -175,8 +170,8 @@
   .nav-items {
     display: block;
     width: 100%;
-  } 
-/*
+  }
+  /*
   .nav-items {
     display: none;
   } */

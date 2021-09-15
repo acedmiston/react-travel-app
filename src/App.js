@@ -28,7 +28,7 @@ class App extends Component {
     if (token) {
       this.setState({ isLoggedIn: true })
     }
-    const results = await axios.get('https://nomader-backend.herokuapp.com/currencies');
+    const results = await axios.get('http://localhost:6002/currencies');
     this.setState({ currencies: results.data.currencies })
   }
 

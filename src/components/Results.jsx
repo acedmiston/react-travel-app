@@ -40,6 +40,11 @@ class Results extends Component {
               );
             }
 
+            // if(this.props.state.numberNomaders >= 1){
+            //   const totalNomaders = this.props.state.numberNomaders *= quote.minPrice;
+            //   return totalNomaders;
+            // }
+
             const outboundDateFormat = new Date(
               quote.OutboundLeg.DepartureDate
             ).toDateString();

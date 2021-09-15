@@ -1,0 +1,795 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000d3;
+  color: rgba(245, 245, 245, 0.863);
+  font-family: 'Source Code Pro', monospace;
+}
+
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 517px;
+  max-width: 1000px;
+}
+
+h4 {
+  font-weight: 900;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  min-width: 400px;
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+}
+
+.brand-logo {
+  font-size: 1.1rem;
+  margin: 0.3rem;
+}
+
+.navbar a:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+}
+
+.navbar-links ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  list-style: none;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 1rem;
+  display: block;
+}
+
+a:hover {
+  font-size: 105%;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+}
+
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+}
+
+header {
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+  padding: 16px;
+  margin-top: 55px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.column-info {
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: auto;
+}
+
+.column-pic {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* margin: auto; */
+  /* position: relative; */
+  /* right: 0; */
+}
+
+.intro-image {
+  /* margin-left: auto; */
+  width: 400px;
+  /* display: block; */
+  border-radius: 80px;
+  padding: 10px;
+}
+
+.typing a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.intro {
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Projects TBD */
+.projects {
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+  border-radius: 8px;
+  padding-bottom: 30px;
+}
+
+.project-content {
+  padding: 10px 15px;
+  background: #fff;
+  color: black;
+  border-radius: 8px;
+  width: 300px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.projects p {
+  font-size: 35px;
+  font-weight: 200;
+  text-align: center;
+}
+
+/* express icon/image */
+.express {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  margin-bottom: -3px;
+}
+
+/* Graph QL icon/image */
+.graphql {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  margin-bottom: -3px;
+}
+
+/* for progress bar */
+#myProgress {
+  width: 100%;
+  background-color: rgb(128, 128, 128);
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: rgb(121, 134, 121);
+}
+
+/* For typewriter effect */
+.typing {
+  height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  margin: 0 auto;
+}
+
+p {
+  font-size: 2vh;
+}
+
+li {
+  font-size: 1.5vh;
+}
+
+.typing.title,
+.typing.phone,
+.typing.location,
+.typing.email {
+  font-size: 16px;
+  padding-top: 10px;
+  width: auto;
+}
+
+.typing.buttons {
+  margin-bottom: 20px;
+  height: auto;
+}
+
+.typing.facts {
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+.typing.contact {
+  margin-bottom: 20px;
+}
+
+.blinker {
+  border-bottom: solid 3px rgba(0, 255, 0, 0.75);
+  position: absolute;
+  right: -7px;
+  width: 30px;
+}
+
+/* Animation */
+.typing.name {
+  animation: animated-name 2s steps(30, end) 1s 1 normal both;
+}
+
+.typing.title {
+  animation: animated-title 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 3.5s;
+}
+
+.typing.email {
+  animation: animated-email 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 5.5s;
+}
+
+.typing.phone {
+  animation: animated-phone 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 5.5s;
+}
+
+.typing.location {
+  animation: animated-location 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 5.5s;
+}
+
+.typing.buttons {
+  animation: animated-buttons 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 7.5s;
+}
+
+.typing.about {
+  animation: animated-about 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 7.5s;
+}
+
+.typing.facts {
+  animation: animated-facts 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 8s;
+}
+
+.typing.skills {
+  animation: animated-skills 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 9.5s;
+}
+
+.typing.projects {
+  animation: animated-projects 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 9.5s;
+}
+
+.typing.experience {
+  animation: animated-experience 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 10.5s;
+}
+
+.typing.contact {
+  animation: animated-contact 2s steps(30, end) 1s 1 normal both;
+  animation-delay: 12.5s;
+}
+
+.blinker {
+  animation: animated-cursor 600ms steps(30, end) infinite;
+}
+
+/* text animation */
+
+@keyframes animated-name {
+  from {
+    width: 0;
+  }
+  to {
+    width: 29ch;
+  }
+}
+
+@keyframes animated-title {
+  from {
+    width: 0;
+  }
+  to {
+    width: 33ch;
+  }
+}
+
+@keyframes animated-location {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes animated-phone {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes animated-email {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes animated-buttons {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes animated-about {
+  from {
+    width: 0;
+  }
+  to {
+    width: 13ch;
+  }
+}
+
+@keyframes animated-facts {
+  from {
+    width: 0;
+  }
+  to {
+    width: 17ch;
+  }
+}
+
+@keyframes animated-skills {
+  from {
+    width: 0;
+  }
+  to {
+    width: 20ch;
+  }
+}
+
+@keyframes animated-experience {
+  from {
+    width: 0;
+  }
+  to {
+    width: 25ch;
+  }
+}
+
+@keyframes animated-projects {
+  from {
+    width: 0;
+  }
+  to {
+    width: 10ch;
+  }
+}
+
+@keyframes animated-location {
+  from {
+    width: 0;
+  }
+  to {
+    width: 18ch;
+  }
+}
+
+@keyframes animated-phone {
+  from {
+    width: 0;
+  }
+  to {
+    width: 24ch;
+  }
+}
+
+@keyframes animated-email {
+  from {
+    width: 0;
+  }
+  to {
+    width: 34ch;
+  }
+}
+
+@keyframes animated-contact {
+  from {
+    width: 0;
+  }
+  to {
+    width: 15ch;
+  }
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor {
+  from {
+    border-bottom-color: rgba(0, 255, 0, 0.75);
+  }
+  to {
+    border-bottom-color: transparent;
+  }
+}
+
+.contact {
+  text-justify: auto;
+}
+
+/* Skills List */
+
+.skills-bar {
+  width: auto;
+  margin: 40px auto;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+}
+
+.skills-bar .bar {
+  margin: 20px 0;
+}
+
+.skills-bar .bar:first-child {
+  margin-top: 0px;
+}
+
+.skills-bar .bar .info {
+  margin-bottom: 5px;
+}
+
+.skills-bar .bar .info span {
+  font-size: 17px;
+  font-weight: 500;
+  opacity: 0;
+  animation: showText 0.5s 1s linear forwards;
+}
+
+@keyframes showText {
+  100% {
+    opacity: 1;
+  }
+}
+
+.skills-bar .bar .progress-line {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 10px;
+  transform: scaleX(0);
+  transform-origin: left;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.05),
+    0px 1px rgba(255, 255, 255, 0.8);
+  animation: animate 1s cubic-bezier(1, 0, 0.5, 1) forwards;
+  animation-delay: 10.5s;
+}
+
+.bar .progress-line span {
+  height: 100%;
+  width: 80%;
+  background: rgba(0, 255, 0, 0.75);
+  position: absolute;
+  border-radius: 10px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 1s 1s cubic-bezier(1, 0, 0.5, 1) forwards;
+}
+
+@keyframes animate {
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.progress-line.html span {
+  width: 95%;
+}
+
+.progress-line.css span {
+  width: 85%;
+}
+
+.progress-line.javascript span {
+  width: 85%;
+}
+
+.progress-line.node span {
+  width: 85%;
+}
+
+.progress-line.react span {
+  width: 80%;
+}
+
+.bar .progress-line span::before {
+  position: absolute;
+  content: '';
+  right: 0;
+  top: -10px;
+  height: 0;
+  width: 0;
+  border: 7px solid transparent;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  border-top-color: #000;
+  opacity: 0;
+  animation: showText2 0.5s 1.5s linear forwards;
+}
+
+.bar .progress-line span::after {
+  position: absolute;
+  right: 0;
+  top: -24px;
+  color: #fff;
+  background: #000;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 1px 8px;
+  border-radius: 3px;
+  opacity: 0;
+  animation: showText2 0.5s 1.5s linear forwards;
+}
+
+@keyframes showText2 {
+  100% {
+    opacity: 1;
+  }
+}
+
+.progress-line.html span::after {
+  content: '95%';
+}
+
+.progress-line.css span::after {
+  content: '85%';
+}
+
+.progress-line.javascript span::after {
+  content: '85%';
+}
+
+.progress-line.progress-line.node span::after {
+  content: '85%';
+}
+
+.progress-line.progress-line.react span::after {
+  content: '80%';
+}
+
+/* timeline */
+
+.timeline {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+  position: relative;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #fff;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.contain {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  z-index: 4;
+}
+
+.contain::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  right: -17px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 255, 0, 0.75);
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: 50%;
+}
+
+.right::after {
+  left: -16px;
+}
+
+.left::before {
+  content: '';
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  top: 22px;
+  right: 30px;
+  border: 10px solid #fff;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent #fff;
+}
+
+.right::before {
+  content: '';
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  top: 22px;
+  left: 30px;
+  border: 10px solid #fff;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #fff transparent transparent;
+}
+
+.content {
+  padding: 10px 15px;
+  background: #fff;
+  color: black;
+  border-radius: 6px;
+  display: block;
+}
+
+.content li {
+  font-size: 1.8vh;
+}
+
+.single-bullet {
+  list-style: none;
+}
+
+/* contact */
+
+.contact-container {
+  margin: 60px auto;
+}
+
+.contact-section {
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+  padding: 1px;
+  border-radius: 10px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.experience {
+  background: linear-gradient(rgba(8, 8, 8, 0.788), rgba(8, 8, 8, 0.775)),
+    url('wallpaper.jpg');
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cv-button {
+  border: 0;
+  background: #34495e;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 12px 50px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.cv-button:hover {
+  background: rgba(0, 255, 0, 0.75);
+}
+
+.contact-section a {
+  text-decoration: none;
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-me {
+  padding-top: 20px;
+}
+
+footer {
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .responsive {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .column-pic {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 925px) {
+  .intro-image {
+    width: 75%;
+  }
+}
+
+@media (max-width: 961px) {
+  .toggle-button {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-links li {
+    text-align: center;
+  }
+
+  .navbar-links li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+}
