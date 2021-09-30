@@ -92,9 +92,8 @@ class Home extends Component {
 
   numberNomaders = () => {
     if (this.state.numberNomaders > 1) {
-      
     }
-  }
+  };
 
   //allows you to clear the state if your airport was incorrect
   onClear = (type) => {
@@ -104,7 +103,7 @@ class Home extends Component {
   //shows all results from the flight search
   onSubmit = async (e) => {
     e.preventDefault();
-    const results = await axios.post('http://localhost:6002/submit', {
+    const results = await axios.post(process.env.REACT_APP_URL + '/submit', {
       payload: `GB/${this.props.currency}/en-GB/${this.state.originAirportSelection.PlaceId}/${this.state.destinationAirportSelection.PlaceId}/${this.state.outBoundDate}/${this.state.inBoundDate}`,
     });
     this.setState({ results: results.data });
@@ -128,10 +127,13 @@ class Home extends Component {
   onInput = async (e) => {
     this.setState({ [e.target.id + 'InputValue']: e.target.value });
 
-    const results = await axios.post('http://localhost:6002/flight-input', {
-      payload: `GB/${this.props.currency}/en-GB/`,
-      params: { query: e.target.value },
-    });
+    const results = await axios.post(
+      process.env.REACT_APP_URL + '/flight-input',
+      {
+        payload: `GB/${this.props.currency}/en-GB/`,
+        params: { query: e.target.value },
+      }
+    );
     console.log(results);
     this.setState({ [e.target.id]: results.data });
   };

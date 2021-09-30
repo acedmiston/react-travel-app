@@ -28,7 +28,7 @@ class App extends Component {
     if (token) {
       this.setState({ isLoggedIn: true })
     }
-    const results = await axios.get('http://localhost:6002/currencies');
+    const results = await axios.get(process.env.REACT_APP_URL + '/currencies');
     this.setState({ currencies: results.data.currencies })
   }
 

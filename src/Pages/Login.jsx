@@ -15,7 +15,7 @@ class Login extends Component {
 
   onSignupSubmit = async (e) => {
     e.preventDefault();
-    const results = await axios.post('http://localhost:6002/sign-up', {
+    const results = await axios.post(process.env.REACT_APP_URL + '/sign-up', {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -40,7 +40,7 @@ class Login extends Component {
 
   onLoginSubmit = async (e) => {
     e.preventDefault();
-    const results = await axios.post('http://localhost:6002/log-in', {
+    const results = await axios.post(process.env.REACT_APP_URL + '/log-in', {
       email: this.state.email,
       password: this.state.password,
     });
